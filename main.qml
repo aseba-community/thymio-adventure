@@ -20,6 +20,6 @@ ApplicationWindow {
         id: aseba
     }
     Component.onCompleted: {
-        aseba.start("tcp:localhost;33333")
+        aseba.start(Qt.platform.os === "android" ? "android:" : "tcp:localhost;33333")
     }
 }
