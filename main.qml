@@ -12,7 +12,7 @@ ApplicationWindow {
 
     Loader {
         id: loader
-        source: "Screen0.qml"
+        source: "ThymioRemoteControl.qml"
         anchors.fill: parent
     }
 

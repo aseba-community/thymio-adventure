@@ -5,5 +5,6 @@
         <file>Screen0Form.ui.qml</file>
         <file>Screen1Scene.qml</file>
         <file>Screen1.qml</file>
+        <file>ThymioRemoteControl.qml</file>
     </qresource>
 </RCC>
