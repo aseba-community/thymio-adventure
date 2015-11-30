@@ -6,5 +6,6 @@
         <file>Screen1Scene.qml</file>
         <file>Screen1.qml</file>
         <file>ThymioRemoteControl.qml</file>
+        <file>ThymioAeslLive.qml</file>
     </qresource>
 </RCC>
