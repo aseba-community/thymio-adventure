@@ -7,7 +7,7 @@ import "qrc:/thymio-ar" as AR
 
 ApplicationWindow {
     title: qsTr("Thymio Adventure")
-    visibility: Window.FullScreen
+    visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
     visible: true
 
     Loader {
