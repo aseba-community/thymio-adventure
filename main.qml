@@ -6,20 +6,20 @@ import QtMultimedia 5.5
 import "qrc:/thymio-ar" as AR
 
 ApplicationWindow {
-    title: qsTr("Thymio Adventure")
-    visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
-    visible: true
+	title: qsTr("Thymio Adventure")
+	visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
+	visible: true
 
-    Loader {
-        id: loader
-        source: "ThymioAeslLive.qml"
-        anchors.fill: parent
-    }
+	Loader {
+		id: loader
+		source: "ThymioVpl2Live.qml"
+		anchors.fill: parent
+	}
 
-    AR.Aseba {
-        id: aseba
-    }
-    Component.onCompleted: {
-        aseba.start(Qt.platform.os === "android" ? "android:" : "tcp:localhost;33333")
-    }
+	AR.Aseba {
+		id: aseba
+	}
+	Component.onCompleted: {
+		aseba.start(Qt.platform.os === "android" ? "android:" : "tcp:localhost;33333")
+	}
 }
