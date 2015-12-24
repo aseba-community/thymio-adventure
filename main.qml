@@ -9,6 +9,8 @@ ApplicationWindow {
 	title: qsTr("Thymio Adventure")
 	visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
 	visible: true
+	width: 1280
+	height: 720
 
 	Loader {
 		id: loader
