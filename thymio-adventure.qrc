@@ -8,5 +8,8 @@
         <file>ThymioRemoteControl.qml</file>
         <file>ThymioAeslLive.qml</file>
         <file>ThymioVpl2Live.qml</file>
+        <file>images/playButton.svg</file>
+        <file>images/stopButton.svg</file>
+        <file>images/playButtonBackground.svg</file>
     </qresource>
 </RCC>
