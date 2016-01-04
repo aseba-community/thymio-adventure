@@ -49,12 +49,8 @@ Item {
 
 			MouseArea {
 				anchors.fill: parent
-				onClicked: {
-					if (thymio.node === undefined) {
-						return;
-					}
-					playing = !playing;
-				}
+				enabled: thymio.node !== undefined
+				onClicked: playing = !playing;
 			}
 		}
 	}
