@@ -21,7 +21,4 @@ ApplicationWindow {
 	AR.Aseba {
 		id: aseba
 	}
-	Component.onCompleted: {
-		aseba.start(Qt.platform.os === "android" ? "android:" : "tcp:localhost;33333")
-	}
 }
