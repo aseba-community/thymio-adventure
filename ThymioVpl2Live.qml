@@ -24,6 +24,11 @@ Item {
 
 	property bool playing: false
 
+	Connections {
+		target: editor.compiler
+		onSourceChanged: playing = false
+	}
+
 	VPL2.FullEditor {
 		id: editor
 		anchors.fill: parent
