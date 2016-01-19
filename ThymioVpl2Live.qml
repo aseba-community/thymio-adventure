@@ -32,7 +32,9 @@ Item {
 		Image {
 			id: stateButton
 			source: {
-				if (thymio.node === undefined) {
+				if (editor.compiler.error !== "") {
+					return "images/compilerError.svg";
+				} else if (thymio.node === undefined) {
 					return "images/connectingStatus.svg";
 				} else if (playing) {
 					return "images/stopButton.svg";
@@ -49,8 +51,8 @@ Item {
 
 			MouseArea {
 				anchors.fill: parent
-				enabled: thymio.node !== undefined
-				onClicked: playing = !playing;
+				enabled: thymio.node !== undefined && editor.compiler.error === ""
+				onClicked: playing = !playing
 			}
 		}
 	}
