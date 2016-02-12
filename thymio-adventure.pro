@@ -1,5 +1,5 @@
 TEMPLATE = app
-QT += core quick widgets 3dcore 3drender 3dquick
+QT += core quick widgets
 SOURCES += main.cpp
 RESOURCES += thymio-adventure.qrc
 include(thymio-ar/thymio-ar.pri)
