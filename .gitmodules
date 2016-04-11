@@ -2,3 +2,7 @@
 	path = thymio-ar
 	url = https://github.com/aseba-community/thymio-ar.git
 	branch = master
+[submodule "assets"]
+	path = assets
+	url = https://github.com/aseba-community/thymio-adventure-assets.git
+	branch = master

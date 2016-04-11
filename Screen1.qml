@@ -7,7 +7,10 @@ Item {
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
-		onRobotFoundChanged: console.warn(robotFound)
+
+		landmarkFileNames: [
+			":/assets/marker.xml"
+		]
 
 		Entity {
 			components: [
@@ -50,30 +53,16 @@ Item {
 				}
 			]
 		}
-	}
-
-	Rectangle {
-		color: "white"
-		anchors.fill: grid
-	}
-	Grid {
-		id: grid
-		columns: 4
-		Text { width: 300; text: vision.robotPose.m11 }
-		Text { width: 300; text: vision.robotPose.m12 }
-		Text { width: 300; text: vision.robotPose.m13 }
-		Text { width: 300; text: vision.robotPose.m14 }
-		Text { width: 300; text: vision.robotPose.m21 }
-		Text { width: 300; text: vision.robotPose.m22 }
-		Text { width: 300; text: vision.robotPose.m23 }
-		Text { width: 300; text: vision.robotPose.m24 }
-		Text { width: 300; text: vision.robotPose.m31 }
-		Text { width: 300; text: vision.robotPose.m32 }
-		Text { width: 300; text: vision.robotPose.m33 }
-		Text { width: 300; text: vision.robotPose.m34 }
-		Text { width: 300; text: vision.robotPose.m41 }
-		Text { width: 300; text: vision.robotPose.m42 }
-		Text { width: 300; text: vision.robotPose.m43 }
-		Text { width: 300; text: vision.robotPose.m44 }
+		Entity {
+			components: [
+				SceneLoader {
+					source: "/models/Grotte.qgltf"
+				},
+				Transform {
+					scale: 0.0005
+					rotationX: 90
+				}
+			]
+		}
 	}
 }

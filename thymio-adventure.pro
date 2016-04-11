@@ -5,6 +5,10 @@ RESOURCES += thymio-adventure.qrc
 include(thymio-ar/thymio-ar.pri)
 include(deployment.pri)
 
+QT3D_MODELS += assets/Grotte.dae
+QGLTF_PARAMS = -g
+load(qgltf)
+
 android {
     DISTFILES += \
         android/AndroidManifest.xml \
