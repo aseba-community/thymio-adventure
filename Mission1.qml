@@ -39,10 +39,11 @@ Item {
 		ThymioSays { message: "The connection is… unstable…" }
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
+			SystemSays { message: "Aim Thymio with the tablet" }
 			onVisibleChanged: if (visible) {
 				console.warn("Here, we could have some small game. A synchronisation gauge appears on the side and fills up as long as you stay focused on Thymio. As soon as you let Thymio leave the centre of the screen, the gauge goes down. When it reaches 100%, the image become clear (we can have an effect like the more the gauge is complete, the clearer the image.");
 			}
-			until: vision.robotFound
+			until: vision.robotPose !== vision.invalidPose
 		}
 		ThymioSays { message: "Much better, thank you." }
 		Choice {
@@ -50,12 +51,12 @@ Item {
 			choices: ["Not really", "I guess"]
 		}
 		ThymioSays { message: "I am an exploration robot, or at least I think." }
-		ThymioSays { message: "It seems that I am running in safe mode. " }
+		ThymioSays { message: "It seems that I am running in safe mode." }
 		ThymioSays { message: "I cannot control my motors and I don’t see anything." }
 		ThymioSays { message: "Would you help me?" }
 		Wait {
 			SystemSays { message: "Place marker number 1 on the center of the table and aim to it with the tablet" }
-			until: vision.robotFound //vision.landmarkFound[0]
+			until: vision.landmarkPoses[0] !== vision.invalidPose
 		}
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
