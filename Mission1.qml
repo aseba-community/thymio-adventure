@@ -1,9 +1,15 @@
 import QtQuick 2.0
 import Qt.labs.controls 1.0
+import Qt3D.Core 2.0
+import Qt3D.Render 2.0
 import "qrc:/thymio-ar" as AR
 import "qrc:/storytelling"
 
 Item {
+
+	property string playerName
+	property bool grotteVisible: false
+
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
@@ -11,9 +17,19 @@ Item {
 		landmarkFileNames: [
 			":/assets/marker.xml"
 		]
-	}
 
-	property string playerName
+		Entity {
+			components: [
+				SceneLoader {
+					source: "/models/Grotte.qgltf"
+				},
+				Transform {
+					scale: grotteVisible ? 0.001 : 0
+					rotationX: 90
+				}
+			]
+		}
+	}
 
 	Dialogue {
 		SystemSays { message: "Connecting..." }
@@ -40,7 +56,7 @@ Item {
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
 			SystemSays { message: "Aim Thymio with the tablet" }
-			onVisibleChanged: if (visible) {
+			onEnabledChanged: if (enabled) {
 				console.warn("Here, we could have some small game. A synchronisation gauge appears on the side and fills up as long as you stay focused on Thymio. As soon as you let Thymio leave the centre of the screen, the gauge goes down. When it reaches 100%, the image become clear (we can have an effect like the more the gauge is complete, the clearer the image.");
 			}
 			until: vision.robotPose !== vision.invalidPose
@@ -60,10 +76,10 @@ Item {
 		}
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
-			onVisibleChanged: if (visible) {
-				console.warn("The cave materialises around Thymio in AR while the message appears.");
+			onEnabledChanged: if (enabled) {
+				grotteVisible = true;
 			}
-			text: "Oh yeah, that’s it. A cave. It seems cold."
+			message: "Oh yeah, that’s it. A cave. It seems cold."
 		}
 	}
 
