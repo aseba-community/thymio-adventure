@@ -40,18 +40,7 @@ Item {
 			ThymioSays { message: "Hello, can anyone hear me?" }
 			choices: ["Who is talking?"]
 		}
-		Wait {
-			ThymioSays { message: "My name is Thymio, what is your name?" }
-			TextField {
-				anchors.centerIn: parent
-				width: parent.width / 4
-				color: "white"
-				font.weight: Font.Black
-				onAccepted: playerName = text
-			}
-			until: playerName !== ""
-		}
-		ThymioSays { message: "Nice to meet you " + playerName }
+		ThymioSays { message: "My name is Thymio." }
 		ThymioSays { message: "The connection is… unstable…" }
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
@@ -64,7 +53,7 @@ Item {
 		ThymioSays { message: "Much better, thank you." }
 		Choice {
 			ThymioSays { message: "Do you know what I am?" }
-			choices: ["Not really", "I guess"]
+			choices: ["Not really"]
 		}
 		ThymioSays { message: "I am an exploration robot, or at least I think." }
 		ThymioSays { message: "It seems that I am running in safe mode." }
