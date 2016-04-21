@@ -60,8 +60,11 @@ Item {
 		ThymioSays { message: "I cannot control my motors and I don’t see anything." }
 		ThymioSays { message: "Would you help me?" }
 		Wait {
+			onEnabledChanged: if (enabled) {
+				vision.calibrationRunning = true;
+			}
 			SystemSays { message: "Place marker number 1 on the center of the table and aim to it with the tablet" }
-			until: vision.landmarkPoses[0] !== vision.invalidPose
+			until: vision.calibrationProgress === 1.0 && !vision.calibrationRunning
 		}
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
