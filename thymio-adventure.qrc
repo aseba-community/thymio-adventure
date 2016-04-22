@@ -12,6 +12,7 @@
         <file>images/stopButton.svg</file>
         <file>images/playButtonBackground.svg</file>
         <file>Mission1.qml</file>
+        <file>Mission2.qml</file>
         <file>storytelling/Wait.qml</file>
         <file>storytelling/SystemSays.qml</file>
         <file>storytelling/ThymioSays.qml</file>
