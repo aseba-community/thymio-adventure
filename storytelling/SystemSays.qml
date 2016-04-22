@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Text {
 	property string message
-	text: "< " + message + " >"
+	text: "&lt; " + message + " &gt;"
 
 	anchors.top: parent.top
 	anchors.topMargin: 64
