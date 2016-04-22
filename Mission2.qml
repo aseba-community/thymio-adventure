@@ -8,6 +8,9 @@ import "qrc:/storytelling"
 
 Item {
 
+	readonly property int motorMin: -500
+	readonly property int motorMax: 500
+
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
@@ -84,8 +87,8 @@ Item {
 				}
 			}
 
-			var left = leftY !== undefined ? 500 - (leftY * 1000 / height) : 0;
-			var right = rightY !== undefined ? 500 - (rightY * 1000 / height) : 0;
+			var left = leftY !== undefined ? motorMax - (leftY * (motorMax - motorMin) / height) : 0;
+			var right = rightY !== undefined ? motorMax - (rightY * (motorMax - motorMin) / height) : 0;
 
 			motorLeftTarget.value = left;
 			motorRightTarget.value = right;
@@ -100,8 +103,8 @@ Item {
 				id: motorLeftTarget
 				Layout.minimumHeight: parent.height / 2
 				orientation: Qt.Vertical
-				from: -500
-				to: 500
+				from: motorMin
+				to: motorMax
 			}
 			Rectangle {
 				Layout.fillWidth: true
@@ -110,8 +113,8 @@ Item {
 				id: motorRightTarget
 				Layout.minimumHeight: parent.height / 2
 				orientation: Qt.Vertical
-				from: -500
-				to: 500
+				from: motorMin
+				to: motorMax
 			}
 			Rectangle {
 				width: parent.width / 5
