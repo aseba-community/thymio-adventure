@@ -32,24 +32,27 @@ Item {
 	}
 
 	Dialogue {
+		// TODO: aseba connection
+		// TODO: black screen
 		SystemSays { message: "Connecting..." }
 		SystemSays { message: "Waiting for answer from parallel world…" }
 		SystemSays { message: "Connection established, code name LEVIGO" }
 		ThymioSays { message: "Is someone there?" }
+		// TODO: spot light, blurred image
 		Choice {
 			ThymioSays { message: "Hello, can anyone hear me?" }
 			choices: ["Who is talking?"]
 		}
 		ThymioSays { message: "My name is Thymio." }
 		ThymioSays { message: "The connection is… unstable…" }
+		// TODO: The screen could blink, blur a bit more, freeze…
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
 			SystemSays { message: "Aim Thymio with the tablet" }
-			onEnabledChanged: if (enabled) {
-				console.warn("Here, we could have some small game. A synchronisation gauge appears on the side and fills up as long as you stay focused on Thymio. As soon as you let Thymio leave the centre of the screen, the gauge goes down. When it reaches 100%, the image become clear (we can have an effect like the more the gauge is complete, the clearer the image.");
-			}
+			// TODO: detect Thymio at the center of the screen, image is clearer when Thymio is at the center
 			until: vision.robotPose !== vision.invalidPose
 		}
+		// TODO: the screen becomes clear
 		ThymioSays { message: "Much better, thank you." }
 		Choice {
 			ThymioSays { message: "Do you know what I am?" }
