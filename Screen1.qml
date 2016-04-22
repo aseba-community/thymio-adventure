@@ -21,6 +21,7 @@ Item {
 				},
 				Transform {
 					scale3D: Qt.vector3d(0.01, 0.1, 0.01)
+					rotationY: 90
 					translation: Qt.vector3d(0, 0.05, 0)
 				}
 			]
