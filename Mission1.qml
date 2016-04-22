@@ -7,7 +7,6 @@ import "qrc:/storytelling"
 
 Item {
 
-	property string playerName
 	property bool grotteVisible: false
 
 	AR.Vision {
