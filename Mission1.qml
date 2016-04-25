@@ -17,16 +17,8 @@ Item {
 			":/assets/marker.xml"
 		]
 
-		Entity {
-			components: [
-				SceneLoader {
-					source: "/models/Grotte.qgltf"
-				},
-				Transform {
-					scale: grotteVisible ? 0.001 : 0
-					rotationX: 90
-				}
-			]
+		Grotte {
+			enabled: grotteVisible
 		}
 	}
 

@@ -18,5 +18,6 @@
         <file>storytelling/ThymioSays.qml</file>
         <file>storytelling/Choice.qml</file>
         <file>storytelling/Dialogue.qml</file>
+        <file>Grotte.qml</file>
     </qresource>
 </RCC>

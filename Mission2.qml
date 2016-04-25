@@ -19,17 +19,7 @@ Item {
 			":/assets/marker.xml"
 		]
 
-		Entity {
-			components: [
-				SceneLoader {
-					source: "/models/Grotte.qgltf"
-				},
-				Transform {
-					scale: 0.001
-					rotationX: 90
-				}
-			]
-		}
+		Grotte {}
 	}
 
 	Dialogue {
