@@ -4,6 +4,9 @@
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
+	app.setOrganizationName("Thymio");
+	app.setOrganizationDomain("thymio.org");
+	app.setApplicationName("Thymio Adventure");
 
     thymioARInit();
 
