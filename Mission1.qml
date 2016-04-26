@@ -58,6 +58,13 @@ Item {
 				vision.calibrationRunning = true;
 			}
 			SystemSays { message: "Place marker number 1 on the center of the table and aim to it with the tablet" }
+			ProgressBar {
+				width: parent.width / 3
+				anchors.bottom: parent.bottom
+				anchors.bottomMargin: parent.height / 3
+				anchors.horizontalCenter: parent.horizontalCenter
+				value: vision.calibrationProgress
+			}
 			until: vision.calibrationProgress === 1.0 && !vision.calibrationRunning
 		}
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
