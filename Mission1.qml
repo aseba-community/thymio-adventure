@@ -7,8 +7,6 @@ import "qrc:/storytelling"
 
 Item {
 
-	property bool grotteVisible: false
-
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
@@ -18,8 +16,15 @@ Item {
 		]
 
 		Grotte {
-			enabled: grotteVisible
+			id: grotte
+			enabled: false
 		}
+	}
+
+	Rectangle {
+		id: blackScreen
+		color: "black"
+		anchors.fill: parent
 	}
 
 	Dialogue {
@@ -29,8 +34,11 @@ Item {
 		SystemSays { message: "Waiting for answer from parallel world…" }
 		SystemSays { message: "Connection established, code name LEVIGO" }
 		ThymioSays { message: "Is someone there?" }
-		// TODO: spot light, blurred image
 		Choice {
+			onEnabledChanged: if (enabled) {
+				blackScreen.visible = false;
+				// TODO: spot light, blurred image
+			}
 			ThymioSays { message: "Hello, can anyone hear me?" }
 			choices: ["Who is talking?"]
 		}
@@ -70,7 +78,7 @@ Item {
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
 			onEnabledChanged: if (enabled) {
-				grotteVisible = true;
+				grotte.enabled = true;
 			}
 			message: "Oh yeah, that’s it. A cave. It seems cold."
 		}
