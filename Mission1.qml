@@ -73,7 +73,7 @@ Item {
 				anchors.horizontalCenter: parent.horizontalCenter
 				value: vision.calibrationProgress
 			}
-			until: vision.calibrationProgress === 1.0 && !vision.calibrationRunning
+			until: vision.calibrationDone
 		}
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
