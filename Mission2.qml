@@ -15,6 +15,13 @@ Item {
 	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
 	property real targetRadius: 0.1
 
+	AR.Thymio {
+		variables : ({
+			"motor.left.target": motorLeftTarget.value,
+			"motor.right.target": motorRightTarget.value
+		})
+	}
+
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
