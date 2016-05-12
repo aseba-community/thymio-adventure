@@ -7,19 +7,19 @@ import "qrc:/storytelling"
 
 Item {
 
-	AR.Vision {
-		id: vision
-		anchors.fill: parent
+//	AR.Vision {
+//		id: vision
+//		anchors.fill: parent
 
-		landmarkFileNames: [
-			":/assets/marker.xml"
-		]
+//		landmarkFileNames: [
+//			":/assets/marker.xml"
+//		]
 
-		Grotte {
-			id: grotte
-			enabled: false
-		}
-	}
+//		Grotte {
+//			id: grotte
+//			enabled: false
+//		}
+//	}
 
 	Rectangle {
 		id: blackScreen
