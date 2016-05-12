@@ -1,9 +1,11 @@
 import QtQuick 2.0
+import Qt.labs.controls 1.0
 import "qrc:/thymio-vpl2" as VPL2
 import "qrc:/thymio-ar" as AR
 
 Item {
 	id: live
+	property alias vplEditor: editor
 
 	AR.Thymio {
 		id: thymio
