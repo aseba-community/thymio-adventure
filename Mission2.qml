@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Qt.labs.controls 1.0
-import Qt3D.Core 2.0
-import Qt3D.Render 2.0
 import "qrc:/thymio-ar" as AR
 import "qrc:/storytelling"
 
@@ -22,14 +20,9 @@ Item {
 		})
 	}
 
-	AR.Vision {
-		id: vision
+	AR.Scene3d {
 		anchors.fill: parent
-
-		landmarkFileNames: [
-			":/assets/marker.xml"
-		]
-
+		camera: vision.landmarkPoses[0]
 		Grotte {}
 	}
 

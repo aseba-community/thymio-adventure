@@ -1,25 +1,18 @@
 import QtQuick 2.0
 import Qt.labs.controls 1.0
-import Qt3D.Core 2.0
-import Qt3D.Render 2.0
 import "qrc:/thymio-ar" as AR
 import "qrc:/storytelling"
 
 Item {
 
-//	AR.Vision {
-//		id: vision
-//		anchors.fill: parent
-
-//		landmarkFileNames: [
-//			":/assets/marker.xml"
-//		]
-
-//		Grotte {
-//			id: grotte
-//			enabled: false
-//		}
-//	}
+	AR.Scene3d {
+		anchors.fill: parent
+		camera: vision.landmarkPoses[0]
+		Grotte {
+			id: grotte
+			enabled: false
+		}
+	}
 
 	Rectangle {
 		id: blackScreen
