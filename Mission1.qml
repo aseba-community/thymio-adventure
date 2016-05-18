@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import Qt.labs.controls 1.0
 import "qrc:/thymio-ar" as AR
 import "qrc:/storytelling"
@@ -44,8 +45,12 @@ Item {
 		// TODO: The screen could blink, blur a bit more, freeze…
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
+			FastBlur {
+				anchors.fill: parent
+				source: vision
+				radius: robotDistance * 64
+			}
 			SystemSays { message: "Aim Thymio with the tablet" }
-			// TODO: image is clearer when Thymio is at the center
 			until: vision.robotPose !== vision.invalidPose && robotDistance < 0.1
 		}
 		// TODO: the screen becomes clear
