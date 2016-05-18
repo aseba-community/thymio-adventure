@@ -27,7 +27,6 @@ Item {
 
 	Dialogue {
 		// TODO: aseba connection
-		// TODO: black screen
 		SystemSays { message: "Connecting..." }
 		SystemSays { message: "Waiting for answer from parallel world…" }
 		SystemSays { message: "Connection established, code name LEVIGO" }
