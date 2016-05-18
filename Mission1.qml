@@ -5,6 +5,10 @@ import "qrc:/storytelling"
 
 Item {
 
+	property vector3d robotPosition3d: vision.robotPose.times(Qt.vector3d(0, 0, 0))
+	property vector2d robotPosition2d: robotPosition3d.toVector2d().times(1 / robotPosition3d.z)
+	property real robotDistance: robotPosition2d.length()
+
 	AR.Scene3d {
 		anchors.fill: parent
 		camera: vision.landmarkPoses[0]
@@ -41,8 +45,8 @@ Item {
 		ThymioSays { message: "Please… synchronise… tablet… with me…" }
 		Wait {
 			SystemSays { message: "Aim Thymio with the tablet" }
-			// TODO: detect Thymio at the center of the screen, image is clearer when Thymio is at the center
-			until: vision.robotPose !== vision.invalidPose
+			// TODO: image is clearer when Thymio is at the center
+			until: vision.robotPose !== vision.invalidPose && robotDistance < 0.1
 		}
 		// TODO: the screen becomes clear
 		ThymioSays { message: "Much better, thank you." }
