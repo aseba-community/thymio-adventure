@@ -31,12 +31,12 @@ Item {
 		onSourceChanged: playing = false
 	}
 
-	VPL2.FullEditor {
+	VPL2.Editor {
 		id: editor
 		anchors.fill: parent
 
 		// run and stop
-		Image {
+		VPL2.HDPIImage {
 			id: stateButton
 			source: {
 				if (editor.compiler.error !== "") {

@@ -1,24 +1,35 @@
 <RCC>
-	<qresource prefix="/">
-		<file>main.qml</file>
-		<file>Screen0.qml</file>
-		<file>Screen0Form.ui.qml</file>
-		<file>Screen1.qml</file>
-		<file>assets/marker.xml</file>
-		<file>ThymioRemoteControl.qml</file>
-		<file>ThymioAeslLive.qml</file>
-		<file>ThymioVpl2Live.qml</file>
-		<file>images/playButton.svg</file>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Screen0.qml</file>
+        <file>Screen0Form.ui.qml</file>
+        <file>Screen1.qml</file>
+        <file>assets/marker.xml</file>
+        <file>ThymioRemoteControl.qml</file>
+        <file>ThymioAeslLive.qml</file>
+        <file>ThymioVpl2Live.qml</file>
+        <file>images/playButton.svg</file>
 		<file>images/stopButton.svg</file>
-		<file>images/playButtonBackground.svg</file>
-		<file>Mission1.qml</file>
-		<file>Mission2.qml</file>
-		<file>storytelling/Wait.qml</file>
-		<file>storytelling/SystemSays.qml</file>
-		<file>storytelling/ThymioSays.qml</file>
-		<file>storytelling/Choice.qml</file>
-		<file>storytelling/Dialogue.qml</file>
-		<file>Grotte.qml</file>
-		<file>qtquickcontrols.conf</file>
-	</qresource>
+        <file>Mission1.qml</file>
+        <file>Mission2.qml</file>
+        <file>storytelling/Wait.qml</file>
+        <file>storytelling/SystemSays.qml</file>
+        <file>storytelling/ThymioSays.qml</file>
+        <file>storytelling/Choice.qml</file>
+        <file>storytelling/Dialogue.qml</file>
+        <file>Grotte.qml</file>
+        <file>qtquickcontrols.conf</file>
+        <file>images/ic_menu_white_24px.svg</file>
+		<file>images/ic_ar_mode_white_24px.svg</file>
+		<file>images/ic_edit_mode_white_24px.svg</file>
+		<file>images/ic_play_white_48px.svg</file>
+		<file>images/ic_stop_white_48px.svg</file>
+		<file>images/ic_freeplay_white_24px.svg</file>
+		<file>images/ic_map_white_24px.svg</file>
+		<file>images/ic_info_white_24px.svg</file>
+		<file>images/ic_connection_off_white_24px.svg</file>
+		<file>images/ic_connection_on1_white_24px.svg</file>
+		<file>images/ic_connection_on2_white_24px.svg</file>
+		<file>images/ic_connection_on3_white_24px.svg</file>
+    </qresource>
 </RCC>
