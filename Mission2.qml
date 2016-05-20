@@ -11,6 +11,17 @@ Item {
 	readonly property int motorMin: -500
 	readonly property int motorMax: 500
 
+	property vector3d robotPos: vision.landmarkPoses[0].inverted().times(vision.robotPose).times(Qt.vector3d(0, 0, 0))
+	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
+	property real targetRadius: 0.1
+
+	AR.Thymio {
+		variables : ({
+			"motor.left.target": motorLeftTarget.value,
+			"motor.right.target": motorRightTarget.value
+		})
+	}
+
 	AR.Vision {
 		id: vision
 		anchors.fill: parent
@@ -49,7 +60,7 @@ Item {
 			// * Please, don’t crash me into a wall…
 			// * That was close!
 			// * Emergency stop!
-			until: false // TODO: detect victory
+			until: targetCenter.minus(robotPos).length() < targetRadius
 		}
 	}
 
