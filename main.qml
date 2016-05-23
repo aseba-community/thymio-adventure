@@ -1,10 +1,11 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
-import QtQuick.Dialogs 1.2
+//import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import Qt.labs.controls 1.0
 import QtMultimedia 5.5
 import "qrc:/thymio-ar" as AR
+import "qrc:/thymio-vpl2" as VPL2
 
 ApplicationWindow {
 	id: window
@@ -14,7 +15,7 @@ ApplicationWindow {
 	width: 960
 	height: 600
 
-	property bool isVPLEditor: loader.item.vplEditor !== undefined
+	property var vplEditor: loader.item.vplEditor !== undefined ? loader.item.vplEditor : null
 
 	header: ToolBar {
 		RowLayout {
@@ -23,15 +24,30 @@ ApplicationWindow {
 			ToolButton {
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: "qrc:/images/ic_menu_white_24px.svg"
+					source: "images/ic_menu_white_24px.svg"
 				}
 				onClicked: drawer.open()
 			}
 
+			ToolButton {
+				contentItem: Image {
+					anchors.centerIn: parent
+					source: !!thymio.node ? "images/ic_connection_on1_white_24px.svg" : "images/ic_connection_off_white_24px.svg"
+				}
+			}
+
 			Label {
 				id: compilationLabel
-				//text: loader.item.vplEditor.minimized ? "<img src=\"qrc:/images/ic_menu_white_24px.svg\" /> Prelude to a new world <img src=\"qrc:/images/ic_menu_white_24px.svg\" />" : "Compilation success"
-				//horizontalAlignment: arMode ? Text.AlignHCenter : Text.AlignLeft
+				text: {
+					if (!vplEditor)
+						return "";
+					else  if (vplEditor.minimized)
+						return "AR Running" ;
+					else if (vplEditor.compiler.error === "")
+						return "Compilation success";
+					else
+						return "Compilation error: " + vplEditor.compiler.error;
+				}
 				horizontalAlignment: Text.AlignHCenter
 				font.pixelSize: 20
 				elide: Label.ElideRight
@@ -40,21 +56,22 @@ ApplicationWindow {
 			}
 
 			ToolButton {
-				visible: isVPLEditor
+				visible: !!vplEditor
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: "qrc:/images/ic_play_circle_filled_white_24px.svg"
+					source: !thymio.playing ? "images/ic_play_white_48px.svg" : "images/ic_stop_white_48px.svg"
 				}
-				onClicked: ; // TODO
+				enabled: !!vplEditor && (vplEditor.compiler.error === "") && (thymio.node !== undefined)
+				onClicked: thymio.playing = !thymio.playing
 			}
 
 			ToolButton {
-				visible: isVPLEditor
+				visible: !!vplEditor
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: (isVPLEditor && loader.item.vplEditor.minimized) ? "qrc:/images/ic_visibility_off_white_24px.svg" : "qrc:/images/ic_visibility_white_24px.svg"
+					source: (!!vplEditor && vplEditor.minimized) ? "images/ic_edit_mode_white_24px.svg" : "images/ic_ar_mode_white_24px.svg"
 				}
-				onClicked: loader.item.vplEditor.minimized = !loader.item.vplEditor.minimized;
+				onClicked: vplEditor.minimized = !vplEditor.minimized;
 			}
 		}
 	}
@@ -73,6 +90,12 @@ ApplicationWindow {
 		]
 	}
 
+	AR.Thymio {
+		id: thymio
+		program: playing ? vplEditor.compiler.source : ""
+		onNodeChanged: playing = false
+	}
+
 	Loader {
 		id: loader
 		source: "ThymioVpl2Live.qml"
@@ -81,8 +104,12 @@ ApplicationWindow {
 
 	ListModel {
 		id: menuItems
-		ListElement { title: "map"; source: "ThymioVpl2Live.qml" }
-		ListElement { title: "settings"; source: "Mission1.qml" }
+		ListElement { title: qsTr("world map"); source: "ThymioVpl2Live.qml"; icon: "images/ic_map_white_24px.svg"}
+		ListElement { title: qsTr("free play"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("save program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("load program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("about"); source: "Mission1.qml" ; icon: "images/ic_info_white_24px.svg" }
+
 		//ListElement { title: "free play"; source: "ThymioVpl2Live.qml" }
 		//ListElement { title: "help"; source: "ThymioVpl2Live.qml" }
 		//ListElement { title: "about"; source: "ThymioVpl2Live.qml" }
@@ -92,7 +119,7 @@ ApplicationWindow {
 		id: drawer
 		edge: Qt.LeftEdge
 		position: 0
-		width: 200
+		width: 280
 		height: window.height
 
 		contentItem: Pane {
@@ -106,8 +133,8 @@ ApplicationWindow {
 				delegate: ItemDelegate {
 					contentItem: Row {
 						spacing: 24
-						Image {
-							source: "qrc:/images/ic_menu_white_24px.svg"
+						VPL2.HDPIImage {
+							source: icon
 							width: 24
 							height: 24
 						}

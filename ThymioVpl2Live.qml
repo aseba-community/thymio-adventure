@@ -7,12 +7,6 @@ Item {
 	id: live
 	property alias vplEditor: editor
 
-	AR.Thymio {
-		id: thymio
-		program: playing ? editor.compiler.source : ""
-		onNodeChanged: playing = false
-	}
-
 	Connections {
 		target: aseba
 		onUserMessage: {
@@ -24,43 +18,14 @@ Item {
 		}
 	}
 
-	property bool playing: false
-
 	Connections {
 		target: editor.compiler
-		onSourceChanged: playing = false
+		onSourceChanged: thymio.playing = false
 	}
 
-	VPL2.FullEditor {
+	VPL2.Editor {
 		id: editor
+		camera: vision.camera
 		anchors.fill: parent
-
-		// run and stop
-		Image {
-			id: stateButton
-			source: {
-				if (editor.compiler.error !== "") {
-					return "images/compilerError.svg";
-				} else if (thymio.node === undefined) {
-					return "images/connectingStatus.svg";
-				} else if (playing) {
-					return "images/stopButton.svg";
-				} else {
-					return "images/playButton.svg"
-				}
-			}
-
-			width: 128
-			height: 128
-			anchors.top: parent.top
-			anchors.horizontalCenter: parent.horizontalCenter
-			anchors.topMargin: 20
-
-			MouseArea {
-				anchors.fill: parent
-				enabled: thymio.node !== undefined && editor.compiler.error === ""
-				onClicked: playing = !playing
-			}
-		}
 	}
 }
