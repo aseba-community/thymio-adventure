@@ -15,7 +15,7 @@ ApplicationWindow {
 	width: 960
 	height: 600
 
-	property bool isVPLEditor: loader.item.vplEditor !== undefined
+	property var vplEditor: loader.item.vplEditor !== undefined ? loader.item.vplEditor : null
 
 	header: ToolBar {
 		RowLayout {
@@ -32,15 +32,22 @@ ApplicationWindow {
 			ToolButton {
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: "images/ic_connection_off_white_24px.svg"
+					source: !!thymio.node ? "images/ic_connection_on1_white_24px.svg" : "images/ic_connection_off_white_24px.svg"
 				}
 			}
 
 			Label {
 				id: compilationLabel
-				text: loader.item.vplEditor.minimized ? "AR Running" : ( loader.item.vplEditor.compiler.error !== "" ? "Compilation error: " + loader.item.vplEditor.compiler.error : "Compilation success")
-				//"<img src=\"qrc:/images/ic_menu_white_24px.svg\" /> Prelude to a new world <img src=\"qrc:/images/ic_menu_white_24px.svg\" />" : "Compilation success"
-				//horizontalAlignment: arMode ? Text.AlignHCenter : Text.AlignLeft
+				text: {
+					if (!vplEditor)
+						return "";
+					else  if (vplEditor.minimized)
+						return "AR Running" ;
+					else if (vplEditor.compiler.error === "")
+						return "Compilation success";
+					else
+						return "Compilation error: " + vplEditor.compiler.error;
+				}
 				horizontalAlignment: Text.AlignHCenter
 				font.pixelSize: 20
 				elide: Label.ElideRight
@@ -49,21 +56,22 @@ ApplicationWindow {
 			}
 
 			ToolButton {
-				visible: isVPLEditor
+				visible: !!vplEditor
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: "qrc:/images/ic_play_white_48px.svg"
+					source: !thymio.playing ? "images/ic_play_white_48px.svg" : "images/ic_stop_white_48px.svg"
 				}
-				onClicked: ; // TODO
+				enabled: !!vplEditor && (vplEditor.compiler.error === "") && (thymio.node !== undefined)
+				onClicked: thymio.playing = !thymio.playing
 			}
 
 			ToolButton {
-				visible: isVPLEditor
+				visible: !!vplEditor
 				contentItem: Image {
 					anchors.centerIn: parent
-					source: (isVPLEditor && loader.item.vplEditor.minimized) ? "images/ic_edit_mode_white_24px.svg" : "images/ic_ar_mode_white_24px.svg"
+					source: (!!vplEditor && vplEditor.minimized) ? "images/ic_edit_mode_white_24px.svg" : "images/ic_ar_mode_white_24px.svg"
 				}
-				onClicked: loader.item.vplEditor.minimized = !loader.item.vplEditor.minimized;
+				onClicked: vplEditor.minimized = !vplEditor.minimized;
 			}
 		}
 	}
@@ -80,6 +88,12 @@ ApplicationWindow {
 		landmarkFileNames: [
 			":/assets/marker.xml"
 		]
+	}
+
+	AR.Thymio {
+		id: thymio
+		program: playing ? vplEditor.compiler.source : ""
+		onNodeChanged: playing = false
 	}
 
 	Loader {
