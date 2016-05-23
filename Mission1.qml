@@ -1,18 +1,28 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 import Qt.labs.controls 1.0
-import "qrc:/thymio-ar" as AR
+import "qrc:/thymio-ar"
 import "qrc:/storytelling"
 
 Item {
+	readonly property Vision vision: vision
 
-	property vector3d robotPosition3d: vision.robotPose.times(Qt.vector3d(0, 0, 0))
+	property vector3d robotPosition3d: vision.robot.pose.times(Qt.vector3d(0, 0, 0))
 	property vector2d robotPosition2d: robotPosition3d.toVector2d().times(1 / robotPosition3d.z)
 	property real robotDistance: robotPosition2d.length()
 
-	AR.Scene3d {
+	Vision {
+		id: vision
 		anchors.fill: parent
-		camera: vision.landmarkPoses[0]
+		landmarks: Landmark {
+			id: landmark
+			fileName: ":/assets/marker.xml"
+		}
+	}
+
+	Scene3d {
+		anchors.fill: parent
+		camera: landmark.pose
 		Grotte {
 			id: grotte
 			enabled: false

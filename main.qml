@@ -15,6 +15,7 @@ ApplicationWindow {
 	width: 960
 	height: 600
 
+	property var vision: loader.item.vision !== undefined ? loader.item.vision : null
 	property var vplEditor: loader.item.vplEditor !== undefined ? loader.item.vplEditor : null
 
 	header: ToolBar {
@@ -81,13 +82,9 @@ ApplicationWindow {
 		color: "#200032"
 	}
 
-	AR.Vision {
-		id: vision
-		anchors.fill: parent
-
-		landmarkFileNames: [
-			":/assets/marker.xml"
-		]
+	Camera {
+		id: camera
+		captureMode: Camera.CaptureViewfinder
 	}
 
 	AR.Thymio {
