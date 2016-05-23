@@ -27,6 +27,7 @@ Item {
 		landmarks: Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
+			property string icon: "images/marker-312.png"
 		}
 	}
 

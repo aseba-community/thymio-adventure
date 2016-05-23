@@ -37,6 +37,24 @@ ApplicationWindow {
 				}
 			}
 
+			Repeater {
+				model: vision ? vision.landmarks : 0
+				delegate: ToolButton {
+					contentItem: Item {
+						Image {
+							source: modelData.icon
+							height: parent.height * 0.8
+							width: parent.height * 0.8
+						}
+						ProgressBar {
+							width: parent.width
+							value: modelData.confidence
+							anchors.bottom: parent.bottom
+						}
+					}
+				}
+			}
+
 			Label {
 				id: compilationLabel
 				text: {

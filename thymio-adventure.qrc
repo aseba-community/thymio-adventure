@@ -31,5 +31,6 @@
 		<file>images/ic_connection_on1_white_24px.svg</file>
 		<file>images/ic_connection_on2_white_24px.svg</file>
 		<file>images/ic_connection_on3_white_24px.svg</file>
+		<file>images/marker-312.png</file>
     </qresource>
 </RCC>
