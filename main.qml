@@ -180,18 +180,54 @@ ApplicationWindow {
 		}
 	}
 
-	Dialog {
+	Popup {
 		id: dashelTargetSelector
-		title: "Change Dashel target"
-		standardButtons: StandardButton.Save | StandardButton.Cancel
+		x: (window.width - width) / 2
+		y: window.height / 6
+		modal: true
+		focus: true
+		closePolicy: Popup.OnEscape | Popup.OnPressOutside
 
-		TextField {
-			id: textInput
-			text: aseba.target
-			implicitWidth: 200
+		onVisibleChanged: {
+			if (visible) {
+				textInput.text = aseba.target;
+			}
 		}
 
-		onAccepted: aseba.target = textInput.text;
+		ColumnLayout {
+			spacing: 16
+
+			Label {
+				text: "Change Dashel target"
+				font.bold: true
+			}
+
+			TextField {
+				id: textInput
+				implicitWidth: 300
+			}
+
+			RowLayout {
+				spacing: 16
+
+				Button {
+					id: okButton
+					text: "Ok"
+					onClicked: {
+						aseba.target = textInput.text;
+						dashelTargetSelector.close();
+					}
+				}
+
+				Button {
+					id: cancelButton
+					text: "Cancel"
+					onClicked: {
+						dashelTargetSelector.close();
+					}
+				}
+			}
+		}
 	}
 
 	AR.Aseba {
