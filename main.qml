@@ -1,6 +1,6 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
-//import QtQuick.Dialogs 1.2
+import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import Qt.labs.controls 1.0
 import QtMultimedia 5.5
@@ -35,6 +35,7 @@ ApplicationWindow {
 					anchors.centerIn: parent
 					source: !!thymio.node ? "images/ic_connection_on1_white_24px.svg" : "images/ic_connection_off_white_24px.svg"
 				}
+				onClicked: dashelTargetSelector.open()
 			}
 
 			Repeater {
@@ -48,6 +49,7 @@ ApplicationWindow {
 						}
 						ProgressBar {
 							width: parent.width
+							to: 0.5
 							value: modelData.confidence
 							anchors.bottom: parent.bottom
 						}
@@ -114,6 +116,7 @@ ApplicationWindow {
 	Loader {
 		id: loader
 		source: "ThymioVpl2Live.qml"
+		//source: "Mission1.qml"
 		anchors.fill: parent
 	}
 
@@ -175,6 +178,20 @@ ApplicationWindow {
 				ScrollIndicator.vertical: ScrollIndicator { }
 			}
 		}
+	}
+
+	Dialog {
+		id: dashelTargetSelector
+		title: "Change Dashel target"
+		standardButtons: StandardButton.Save | StandardButton.Cancel
+
+		TextField {
+			id: textInput
+			text: aseba.target
+			implicitWidth: 200
+		}
+
+		onAccepted: aseba.target = textInput.text;
 	}
 
 	AR.Aseba {

@@ -6,6 +6,7 @@ import "qrc:/thymio-ar" as AR
 Item {
 	id: live
 	property alias vplEditor: editor
+	property alias vision: vision
 
 	Connections {
 		target: aseba
@@ -18,6 +19,25 @@ Item {
 		}
 	}
 
+	AR.Vision {
+		id: vision
+		anchors.fill: parent
+		landmarks: AR.Landmark {
+			id: landmark
+			fileName: ":/assets/marker.xml"
+			property string icon: "images/marker-312.png"
+		}
+	}
+
+	AR.Scene3d {
+		x: vision.sourceInOutputRect.x
+		y: vision.sourceInOutputRect.y
+		width: vision.sourceInOutputRect.width
+		height: vision.sourceInOutputRect.height
+		camera: landmark.pose
+		Grotte {}
+	}
+
 	Connections {
 		target: editor.compiler
 		onSourceChanged: thymio.playing = false
@@ -25,7 +45,14 @@ Item {
 
 	VPL2.Editor {
 		id: editor
-		camera: vision.camera
 		anchors.fill: parent
+		onMinimizedChanged: {
+			if (minimized)
+				camera.start();
+		}
+		onMainContainerScaleChanged: {
+			if (mainContainerScale === 1.0)
+				camera.stop();
+		}
 	}
 }
