@@ -10,7 +10,7 @@ Item {
 	readonly property int motorMin: -500
 	readonly property int motorMax: 500
 
-	property vector3d robotPos: landmark.pose.inverted().times(vision.robotPose).times(Qt.vector3d(0, 0, 0))
+	property vector3d robotPos: landmark.pose.inverted().times(vision.robot.pose).times(Qt.vector3d(0, 0, 0))
 	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
 	property real targetRadius: 0.1
 
