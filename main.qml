@@ -105,6 +105,7 @@ ApplicationWindow {
 	Camera {
 		id: camera
 		captureMode: Camera.CaptureViewfinder
+		//deviceId: QtMultimedia.availableCameras[1].deviceId // hack to use second camera on laptop
 	}
 
 	AR.Thymio {
@@ -115,18 +116,19 @@ ApplicationWindow {
 
 	Loader {
 		id: loader
-		source: "ThymioVpl2Live.qml"
+		source: "Map.qml"
+		//source: "ThymioVpl2Live.qml"
 		//source: "Mission1.qml"
 		anchors.fill: parent
 	}
 
 	ListModel {
 		id: menuItems
-		ListElement { title: qsTr("world map"); source: "ThymioVpl2Live.qml"; icon: "images/ic_map_white_24px.svg"}
+		ListElement { title: qsTr("world map"); source: "Map.qml"; icon: "images/ic_map_white_24px.svg"}
 		ListElement { title: qsTr("free play"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
-		ListElement { title: qsTr("save program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("save program"); source: "Mission2.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("load program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
-		ListElement { title: qsTr("about"); source: "Mission1.qml" ; icon: "images/ic_info_white_24px.svg" }
+		ListElement { title: qsTr("about"); source: "ThymioVpl2Live.qml" ; icon: "images/ic_info_white_24px.svg" }
 
 		//ListElement { title: "free play"; source: "ThymioVpl2Live.qml" }
 		//ListElement { title: "help"; source: "ThymioVpl2Live.qml" }

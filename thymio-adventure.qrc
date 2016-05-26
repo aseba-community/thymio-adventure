@@ -9,7 +9,7 @@
         <file>ThymioAeslLive.qml</file>
         <file>ThymioVpl2Live.qml</file>
         <file>images/playButton.svg</file>
-		<file>images/stopButton.svg</file>
+        <file>images/stopButton.svg</file>
         <file>Mission1.qml</file>
         <file>Mission2.qml</file>
         <file>storytelling/Wait.qml</file>
@@ -20,17 +20,24 @@
         <file>Grotte.qml</file>
         <file>qtquickcontrols.conf</file>
         <file>images/ic_menu_white_24px.svg</file>
-		<file>images/ic_ar_mode_white_24px.svg</file>
-		<file>images/ic_edit_mode_white_24px.svg</file>
-		<file>images/ic_play_white_48px.svg</file>
-		<file>images/ic_stop_white_48px.svg</file>
-		<file>images/ic_freeplay_white_24px.svg</file>
-		<file>images/ic_map_white_24px.svg</file>
-		<file>images/ic_info_white_24px.svg</file>
-		<file>images/ic_connection_off_white_24px.svg</file>
-		<file>images/ic_connection_on1_white_24px.svg</file>
-		<file>images/ic_connection_on2_white_24px.svg</file>
-		<file>images/ic_connection_on3_white_24px.svg</file>
-		<file>images/marker-312.png</file>
+        <file>images/ic_ar_mode_white_24px.svg</file>
+        <file>images/ic_edit_mode_white_24px.svg</file>
+        <file>images/ic_play_white_48px.svg</file>
+        <file>images/ic_stop_white_48px.svg</file>
+        <file>images/ic_freeplay_white_24px.svg</file>
+        <file>images/ic_map_white_24px.svg</file>
+        <file>images/ic_info_white_24px.svg</file>
+        <file>images/ic_connection_off_white_24px.svg</file>
+        <file>images/ic_connection_on1_white_24px.svg</file>
+        <file>images/ic_connection_on2_white_24px.svg</file>
+        <file>images/ic_connection_on3_white_24px.svg</file>
+        <file>images/marker-312.png</file>
+        <file>Map.qml</file>
+        <file>images/map/island03.png</file>
+        <file>images/map/island02.png</file>
+        <file>images/map/island04.png</file>
+        <file>widgets/AnimatedImage.qml</file>
+        <file>images/map/vapor-particle.png</file>
+        <file>widgets/VaporImageParticle.qml</file>
     </qresource>
 </RCC>
