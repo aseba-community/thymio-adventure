@@ -39,5 +39,7 @@
         <file>widgets/AnimatedImage.qml</file>
         <file>images/map/vapor-particle.png</file>
         <file>widgets/VaporImageParticle.qml</file>
+        <file>images/map/sustain-particle.png</file>
+        <file>images/map/snow-particle.png</file>
     </qresource>
 </RCC>

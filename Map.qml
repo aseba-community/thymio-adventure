@@ -22,13 +22,32 @@ Rectangle {
 
 		AnimatedImage {
 			source: "images/map/island04.png"
-			x: 200
+			x: 0
 			duration: 4000
 			y1: 60
 			y2: 40
 
 			ParticleSystem {
 				id: particleSystem
+			}
+			ImageParticle {
+				system: particleSystem
+				groups: "hovering"
+				z: -1
+				source: "images/map/sustain-particle.png"
+				alpha: 0.8
+				yVector: PointDirection {
+					x: 0
+					y: 4
+					xVariation: 0
+					yVariation: 0.2
+				}
+			}
+			ImageParticle {
+				system: particleSystem
+				groups: "snow"
+				z: 2
+				source: "images/map/snow-particle.png"
 			}
 			VaporImageParticle {
 				system: particleSystem
@@ -40,6 +59,85 @@ Rectangle {
 				groups: "frontVapor"
 				z: 2
 			}
+			Emitter {
+				system: particleSystem
+				group: "snow"
+				x: 420
+				y: 40
+				width: 720
+				height: 400
+				shape: EllipseShape {}
+				emitRate: 30
+				lifeSpan: 6500
+				lifeSpanVariation: 500
+				size: 8
+				velocity: AngleDirection {
+					angle: 90
+					angleVariation: 5
+					magnitude: 40
+					magnitudeVariation: 5
+				}
+				acceleration: AngleDirection {
+					angle: -180
+					angleVariation: 5
+					magnitude: 8
+					magnitudeVariation: 2
+				}
+			}
+			Emitter {
+				system: particleSystem
+				group: "hovering"
+				x: 537+80
+				y: 774+1000
+				width: 70
+				height: 25
+				shape: EllipseShape {}
+				emitRate: 50
+				lifeSpan: 3700
+				lifeSpanVariation: 0
+				size: 30
+				endSize: 180
+				velocity: AngleDirection {
+					angle: -90
+					angleVariation: 2
+					magnitude: 400
+					magnitudeVariation: 0
+				}
+				acceleration: AngleDirection {
+					angle: 90
+					angleVariation: 0
+					magnitude: 40
+					magnitudeVariation: 0
+				}
+			}
+			Emitter {
+				system: particleSystem
+				group: "frontVapor"
+				x: 537
+				y: 774
+				width: 250
+				height: 60
+				shape: EllipseShape {}
+				emitRate: 0.5
+				lifeSpan: 5000
+				lifeSpanVariation: 1000
+				size: 200
+				endSize: 400
+				sizeVariation: 50
+				velocity: AngleDirection {
+					angle: 90
+					angleVariation: 130
+					magnitude: 10
+					magnitudeVariation: 5
+				}
+				acceleration: AngleDirection {
+					angle: -90
+					angleVariation: 180
+					magnitude: 0
+					magnitudeVariation: 2
+				}
+			}
+
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
