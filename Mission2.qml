@@ -10,7 +10,7 @@ Item {
 	readonly property int motorMin: -500
 	readonly property int motorMax: 500
 
-	property vector3d robotPos: landmark.pose.inverted().times(vision.robotPose).times(Qt.vector3d(0, 0, 0))
+	property vector3d robotPos: landmark.pose.inverted().times(vision.robot.pose).times(Qt.vector3d(0, 0, 0))
 	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
 	property real targetRadius: 0.1
 
@@ -73,30 +73,30 @@ Item {
 		visible: false
 		enabled: false
 
-		anchors.fill: parent
 		mouseEnabled: false
 
+		height: parent.height / 2
+		width: parent.width
+		anchors.verticalCenter: parent.verticalCenter
+
 		onTouchUpdated: {
-			var leftY = undefined;
-			var rightY = undefined;
+			var left = undefined;
+			var right = undefined;
 			for (var i = 0; i < touchPoints.length; ++i) {
 				var point = touchPoints[i];
 				if (point.startX < width / 2) {
-					if (leftY === undefined) {
-						leftY = point.sceneY;
+					if (left === undefined) {
+						left = motorMax - (point.y * (motorMax - motorMin) / height);
 					}
 				} else {
-					if (rightY === undefined) {
-						rightY = point.sceneY;
+					if (right === undefined) {
+						right = motorMax - (point.y * (motorMax - motorMin) / height);
 					}
 				}
 			}
 
-			var left = leftY !== undefined ? motorMax - (leftY * (motorMax - motorMin) / height) : 0;
-			var right = rightY !== undefined ? motorMax - (rightY * (motorMax - motorMin) / height) : 0;
-
-			motorLeftTarget.value = left;
-			motorRightTarget.value = right;
+			motorLeftTarget.value = left || 0;
+			motorRightTarget.value = right || 0;
 		}
 
 		RowLayout {
@@ -106,7 +106,7 @@ Item {
 			}
 			Slider {
 				id: motorLeftTarget
-				Layout.minimumHeight: parent.height / 2
+				Layout.fillHeight: true
 				orientation: Qt.Vertical
 				from: motorMin
 				to: motorMax
@@ -116,7 +116,7 @@ Item {
 			}
 			Slider {
 				id: motorRightTarget
-				Layout.minimumHeight: parent.height / 2
+				Layout.fillHeight: true
 				orientation: Qt.Vertical
 				from: motorMin
 				to: motorMax
