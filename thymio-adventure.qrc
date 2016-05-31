@@ -41,5 +41,12 @@
         <file>widgets/VaporImageParticle.qml</file>
         <file>images/map/sustain-particle.png</file>
         <file>images/map/snow-particle.png</file>
+        <file>images/map/sustain-particle-2.png</file>
+        <file>images/map/island04-blocks-left.png</file>
+        <file>images/map/island04-blocks-right.png</file>
+        <file>images/map/island01.png</file>
+        <file>widgets/HoveringVaporImageParticle.qml</file>
+        <file>widgets/HoveringImageParticle.qml</file>
+        <file>widgets/HoveringEmitter.qml</file>
     </qresource>
 </RCC>

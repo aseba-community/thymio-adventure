@@ -6,18 +6,9 @@ ImageParticle {
 	alpha: 0.8
 	blueVariation: 0.02
 	xVector: PointDirection {
-		x: 1.2
+		x: 1.6
 		y: 0
 		xVariation: 0.2
 		yVariation: 0
 	}
-	yVector: PointDirection {
-		x: 0
-		y: 1.2
-		xVariation: 0
-		yVariation: 0.2
-	}
-	rotationVariation: 360
-	rotationVelocity: 30
-	rotationVelocityVariation: 30
 }

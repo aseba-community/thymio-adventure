@@ -118,7 +118,7 @@ ApplicationWindow {
 		id: loader
 		source: "Map.qml"
 		//source: "ThymioVpl2Live.qml"
-		//source: "Mission1.qml"
+		//source: "Mission2.qml"
 		anchors.fill: parent
 	}
 
