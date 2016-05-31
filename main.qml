@@ -2,7 +2,7 @@ import QtQuick 2.6
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
-import Qt.labs.controls 1.0
+import QtQuick.Controls 2.0
 import QtMultimedia 5.5
 import "qrc:/thymio-ar" as AR
 import "qrc:/thymio-vpl2" as VPL2

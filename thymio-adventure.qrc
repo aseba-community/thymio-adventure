@@ -18,7 +18,7 @@
         <file>storytelling/Choice.qml</file>
         <file>storytelling/Dialogue.qml</file>
         <file>Grotte.qml</file>
-        <file>qtquickcontrols.conf</file>
+		<file>qtquickcontrols2.conf</file>
         <file>images/ic_menu_white_24px.svg</file>
         <file>images/ic_ar_mode_white_24px.svg</file>
         <file>images/ic_edit_mode_white_24px.svg</file>
