@@ -79,11 +79,11 @@ Item {
 		Wait {
 			FastBlur {
 				anchors.fill: parent
-				source: vision
-				radius: robotDistance * 64
+				source: videoOutput
+				radius: vision.robot.found ? robotDistance * 64 : 128
 			}
 			SystemSays { message: "Aim Thymio with the tablet" }
-			until: vision.robotPose !== vision.invalidPose && robotDistance < 0.1
+			until: vision.robot.found && robotDistance < 0.1
 		}
 		// TODO: the screen becomes clear
 		ThymioSays { message: "Much better, thank you." }
