@@ -108,10 +108,14 @@ ApplicationWindow {
 		//deviceId: QtMultimedia.availableCameras[1].deviceId // hack to use second camera on laptop
 	}
 
-	AR.Thymio {
-		id: thymio
-		program: playing ? vplEditor.compiler.source : ""
-		onNodeChanged: playing = false
+	property rect cameraRect
+	VideoOutput {
+		id: videoOutput
+		anchors.fill: parent
+		source: camera
+		filters: vision ? [ vision ] : []
+		fillMode: VideoOutput.PreserveAspectCrop
+		onContentRectChanged: cameraRect = mapNormalizedRectToItem(Qt.rect(0, 0, 1, 1));
 	}
 
 	Loader {
@@ -234,5 +238,11 @@ ApplicationWindow {
 
 	AR.Aseba {
 		id: aseba
+	}
+
+	AR.Thymio {
+		id: thymio
+		program: playing ? vplEditor.compiler.source : ""
+		onNodeChanged: playing = false
 	}
 }

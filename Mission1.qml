@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.0
 import "qrc:/thymio-ar"
@@ -13,7 +13,6 @@ Item {
 
 	Vision {
 		id: vision
-		anchors.fill: parent
 		landmarks: Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -34,6 +33,29 @@ Item {
 		id: blackScreen
 		color: "black"
 		anchors.fill: parent
+	}
+
+	Rectangle {
+		visible: vision.calibrationRunning
+
+		height: parent.height
+		width: parent.height
+		opacity: 0.5
+
+		anchors.right: vision.calibrationRight ? parent.right : undefined
+		transform: [
+			Scale {
+				xScale: 1 / height
+				yScale: 1 / height
+			},
+			Matrix4x4 {
+				matrix: vision.calibrationTransform
+			},
+			Scale {
+				xScale: height
+				yScale: height
+			}
+		]
 	}
 
 	Dialogue {

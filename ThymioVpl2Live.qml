@@ -21,7 +21,6 @@ Item {
 
 	AR.Vision {
 		id: vision
-		anchors.fill: parent
 		landmarks: AR.Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -30,10 +29,7 @@ Item {
 	}
 
 	AR.Scene3d {
-		x: vision.sourceInOutputRect.x
-		y: vision.sourceInOutputRect.y
-		width: vision.sourceInOutputRect.width
-		height: vision.sourceInOutputRect.height
+		anchors.fill: parent
 		camera: landmark.pose
 		Grotte {}
 	}
