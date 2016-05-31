@@ -4,6 +4,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
 import QtMultimedia 5.5
+import Qt.labs.settings 1.0
 import "qrc:/thymio-ar" as AR
 import "qrc:/thymio-vpl2" as VPL2
 
@@ -120,23 +121,22 @@ ApplicationWindow {
 
 	Loader {
 		id: loader
-		source: "Map.qml"
-		//source: "ThymioVpl2Live.qml"
-		//source: "Mission2.qml"
+		source: "Mission1.qml"
 		anchors.fill: parent
+
+		Settings {
+			property alias source: loader.source
+		}
 	}
 
 	ListModel {
 		id: menuItems
+
 		ListElement { title: qsTr("world map"); source: "Map.qml"; icon: "images/ic_map_white_24px.svg"}
-		ListElement { title: qsTr("free play"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("free play"); source: "ThymioVpl2Live.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("save program"); source: "Mission2.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("load program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
-		ListElement { title: qsTr("about"); source: "ThymioVpl2Live.qml" ; icon: "images/ic_info_white_24px.svg" }
-
-		//ListElement { title: "free play"; source: "ThymioVpl2Live.qml" }
-		//ListElement { title: "help"; source: "ThymioVpl2Live.qml" }
-		//ListElement { title: "about"; source: "ThymioVpl2Live.qml" }
+		ListElement { title: qsTr("about"); source: "About.qml" ; icon: "images/ic_info_white_24px.svg" }
 	}
 
 	Drawer {
@@ -161,16 +161,19 @@ ApplicationWindow {
 							source: icon
 							width: 24
 							height: 24
+							opacity: enabled ? 1.0 : 0.5
 						}
 						Text {
 							text: model.title
 							font.pixelSize: 14
 							font.weight: Font.Medium
 							color: "white"
+							opacity: enabled ? 1.0 : 0.5
 						}
 					}
 					text: model.title
 					highlighted: ListView.isCurrentItem
+					enabled: loader.source.toString().indexOf(source) === -1
 					onClicked: {
 						if (listView.currentIndex != index) {
 							listView.currentIndex = index;

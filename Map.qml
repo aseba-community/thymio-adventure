@@ -1,15 +1,16 @@
 import QtQuick 2.6
 import QtQuick.Particles 2.0
+import QtQuick.Controls 2.0
 import "widgets"
 
 Rectangle {
 	color: "#808080"
+
 	// the drawing of the map
 	Item {
-		anchors.centerIn: parent
 		width: 2827
 		height: 2050
-		transformOrigin: Item.Center
+		transformOrigin: Item.TopLeft
 		scale: Math.min(parent.width / width, parent.height / height)
 
 		// general particles
@@ -497,6 +498,26 @@ Rectangle {
 				lifeSpan: 1300
 				velocityMagnitude: 600
 				accelerationMagnitude: 60
+			}
+		}
+	}
+
+	// list of missions
+
+	Column {
+		anchors.right: parent.right
+		anchors.top: parent.top
+		anchors.bottom: parent.bottom
+		padding: 16
+
+		Repeater {
+			model: [
+				{ name: "Mission 1", source: "Mission1.qml" },
+				{ name: "Mission 2", source: "Mission2.qml" },
+			]
+			Button {
+				text: modelData.name
+				onClicked: loader.source = modelData.source;
 			}
 		}
 	}

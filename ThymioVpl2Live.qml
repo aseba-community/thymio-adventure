@@ -31,7 +31,7 @@ Item {
 	AR.Scene3d {
 		anchors.fill: parent
 		camera: landmark.pose
-		Grotte {}
+		// TODO: add AR objects here for free play
 	}
 
 	Connections {
