@@ -134,8 +134,8 @@ ApplicationWindow {
 
 		ListElement { title: qsTr("world map"); source: "Map.qml"; icon: "images/ic_map_white_24px.svg"}
 		ListElement { title: qsTr("free play"); source: "ThymioVpl2Live.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
-		ListElement { title: qsTr("save program"); source: "Mission2.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
-		ListElement { title: qsTr("load program"); source: "Mission1.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("load program"); save: false; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("save program"); save: true; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("about"); source: "About.qml" ; icon: "images/ic_info_white_24px.svg" }
 	}
 
@@ -173,15 +173,29 @@ ApplicationWindow {
 					}
 					text: model.title
 					highlighted: ListView.isCurrentItem
-					enabled: loader.source.toString().indexOf(source) === -1
+					enabled: {
+						if (source === undefined) {
+							// load/save
+							return !!vplEditor;
+						} else {
+							// link to a QML file
+							return (loader.source.toString().indexOf(source) === -1);
+						}
+					}
 					onClicked: {
-						if (listView.currentIndex != index) {
-							listView.currentIndex = index;
-							loader.source = source;
+						if (source === undefined) {
+							// load/save dialog
+							saveProgramDialog.isSave = save;
+							saveProgramDialog.visible = true;
+						} else {
+							// link to a QML file
+							if (listView.currentIndex != index) {
+								listView.currentIndex = index;
+								loader.source = source;
+							}
 						}
 						drawer.close()
 					}
-
 				}
 
 				ScrollIndicator.vertical: ScrollIndicator { }
@@ -204,20 +218,30 @@ ApplicationWindow {
 		}
 
 		ColumnLayout {
-			spacing: 16
+			spacing: 20
 
 			Label {
-				text: "Change Dashel target"
-				font.bold: true
+				text: "Set Dashel target"
+				font.weight: Font.Medium
+				font.pointSize: 21
 			}
 
 			TextField {
 				id: textInput
-				implicitWidth: 300
+				implicitWidth: 280
 			}
 
 			RowLayout {
 				spacing: 16
+				Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
+				Button {
+					id: cancelButton
+					text: "Cancel"
+					onClicked: {
+						dashelTargetSelector.close();
+					}
+				}
 
 				Button {
 					id: okButton
@@ -227,12 +251,98 @@ ApplicationWindow {
 						dashelTargetSelector.close();
 					}
 				}
+			}
+		}
+	}
+
+	Popup {
+		id: saveProgramDialog
+		x: (parent.width - width) / 2
+		y: (parent.height - height) / 2
+		modal: true
+		focus: true
+		closePolicy: Popup.OnEscape | Popup.OnPressOutside
+
+		property bool isSave
+
+		ListModel {
+			id: programList
+		}
+
+		onVisibleChanged: {
+			if (visible) {
+				// update list of programs
+				programList.clear();
+				var foundCurrent = false;
+				var programs = vplEditor.listPrograms();
+				for (var i = 0; i < programs.length; ++i) {
+					var name = programs[i].name;
+					programList.append({ "name":  name });
+					if (name === programName.text)
+						foundCurrent = true;
+				}
+				if (!foundCurrent)
+					programName.text = "";
+			}
+		}
+
+		ColumnLayout {
+			spacing: 20
+
+			Label {
+				text: saveProgramDialog.isSave ? "Save the program?" : "Load a program?"
+				font.weight: Font.Medium
+				font.pointSize: 21
+			}
+
+			Frame {
+				ListView {
+					clip: true
+					contentWidth: implicitWidth
+					contentHeight: contentItem.childrenRect.height
+					implicitHeight: 140
+					implicitWidth: 200
+					spacing: 12
+					model: programList
+					delegate: Label {
+						text: name
+						width: parent.width
+						MouseArea {
+							anchors.fill: parent
+							onClicked: programName.text = parent.text;
+						}
+					}
+				}
+			}
+
+			TextField {
+				id: programName
+				readOnly: !saveProgramDialog.isSave
+				anchors.left: parent.left
+				anchors.right: parent.right
+			}
+
+			RowLayout {
+				spacing: 16
+				Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
 				Button {
-					id: cancelButton
+					id: cancelButton2
 					text: "Cancel"
+					onClicked: saveProgramDialog.close()
+				}
+
+				Button {
+					id: okButton2
+					text: saveProgramDialog.isSave ? "Save" : "Load"
+					enabled: saveProgramDialog.isSave || programName.text !== ""
 					onClicked: {
-						dashelTargetSelector.close();
+						if (saveProgramDialog.isSave) {
+							vplEditor.saveProgram(programName.text);
+						} else {
+							vplEditor.loadProgram(programName.text);
+						}
+						saveProgramDialog.close();
 					}
 				}
 			}
