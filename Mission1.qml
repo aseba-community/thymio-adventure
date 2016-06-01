@@ -38,22 +38,23 @@ Item {
 	Rectangle {
 		visible: vision.calibrationRunning
 
-		height: parent.height
-		width: parent.height
+		x: cameraRect.x  + (vision.calibrationRight ? cameraRect.width - cameraRect.height : 0)
+		y: cameraRect.y
+		height: cameraRect.height
+		width: cameraRect.height
 		opacity: 0.5
 
-		anchors.right: vision.calibrationRight ? parent.right : undefined
 		transform: [
 			Scale {
-				xScale: 1 / height
-				yScale: 1 / height
+				xScale: 1 / cameraRect.height
+				yScale: 1 / cameraRect.height
 			},
 			Matrix4x4 {
 				matrix: vision.calibrationTransform
 			},
 			Scale {
-				xScale: height
-				yScale: height
+				xScale: cameraRect.height
+				yScale: cameraRect.height
 			}
 		]
 	}
