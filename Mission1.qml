@@ -86,7 +86,6 @@ Item {
 			SystemSays { message: "Aim Thymio with the tablet" }
 			until: vision.robot.found && robotDistance < 0.1
 		}
-		// TODO: the screen becomes clear
 		ThymioSays { message: "Much better, thank you." }
 		Choice {
 			ThymioSays { message: "Do you know what I am?" }
