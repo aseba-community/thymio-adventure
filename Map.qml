@@ -113,9 +113,41 @@ Rectangle {
 			y2: 110
 
 			Image {
-				x: -68
+				x: -78
 				y: 208
 				source: "images/map/island04-blocks-left.png"
+				SequentialAnimation on x {
+					loops: Animation.Infinite
+					NumberAnimation {
+						to: -58
+						duration: 4000
+						easing.type: Easing.InOutSine
+					}
+					NumberAnimation {
+						to: -78
+						duration: 4000
+						easing.type: Easing.InOutSine
+					}
+				}
+			}
+
+			Image {
+				x: 640
+				y: 450
+				source: "images/map/island04-blocks-right.png"
+				SequentialAnimation on x {
+					loops: Animation.Infinite
+					NumberAnimation {
+						to: 615
+						duration: 4000
+						easing.type: Easing.InOutSine
+					}
+					NumberAnimation {
+						to: 640
+						duration: 4000
+						easing.type: Easing.InOutSine
+					}
+				}
 			}
 
 			Emitter {
@@ -214,14 +246,21 @@ Rectangle {
 
 		AnimatedImage {
 			source: "images/map/island02.png"
-			x: 1100
+			x: 1152
 			duration: 5000
 			y1: 780
 			y2: 800
 
+			Image {
+				source: "images/map/island02-cascade-bottom-left.png"
+				x: 299
+				y: 1081
+				z: -2
+			}
+
 			HoveringEmitter {
 				system: particleSystem
-				x: 290
+				x: 238
 				y: 1075
 				width: 100
 				deltaWidth: 60
@@ -235,7 +274,7 @@ Rectangle {
 
 			HoveringEmitter {
 				system: particleSystem
-				x: 462
+				x: 410
 				y: 1062
 				width: 290
 				deltaWidth: 140
@@ -249,7 +288,7 @@ Rectangle {
 
 			HoveringEmitter {
 				system: particleSystem
-				x: 1030
+				x: 978
 				y: 1004
 				width: 250
 				deltaWidth: 130
@@ -264,8 +303,8 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 390
-				y: 15
+				x: 338
+				y: 13
 				width: 140
 				height: 30
 				shape: EllipseShape {}
@@ -291,8 +330,8 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 263
-				y: 138
+				x: 211
+				y: 135
 				width: 30
 				height: 10
 				shape: EllipseShape {}
@@ -318,8 +357,8 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 643
-				y: 131
+				x: 591
+				y: 128
 				width: 20
 				height: 10
 				shape: EllipseShape {}
@@ -345,7 +384,7 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 652
+				x: 600
 				y: 917
 				width: 30
 				height: 30
@@ -372,7 +411,7 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 840
+				x: 790
 				y: 985
 				width: 30
 				height: 30
@@ -399,7 +438,7 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 1363
+				x: 1315
 				y: 828
 				width: 9
 				height: 27
@@ -426,7 +465,7 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 235
+				x: 183
 				y: 1027
 				width: 7
 				height: 15
@@ -453,7 +492,7 @@ Rectangle {
 			Emitter {
 				system: particleSystem
 				group: "frontVapor"
-				x: 1520
+				x: 1468
 				y: 640
 				width: 18
 				height: 18
@@ -477,6 +516,89 @@ Rectangle {
 					magnitudeVariation: 2
 				}
 			}
+			Emitter {
+				system: particleSystem
+				group: "backVapor"
+				x: 1290
+				y: 180
+				width: 8
+				height: 18
+				shape: EllipseShape {}
+				emitRate: 2
+				lifeSpan: 5000
+				lifeSpanVariation: 1000
+				size: 100
+				endSize: 180
+				sizeVariation: 16
+				velocity: AngleDirection {
+					angle: -20
+					angleVariation: 10
+					magnitude: 30
+					magnitudeVariation: 8
+				}
+				acceleration: AngleDirection {
+					angle: -60
+					angleVariation: 11
+					magnitude: 9
+					magnitudeVariation: 2
+				}
+			}
+
+			AnimatedSprite  {
+				source: "images/map/island02-wave-volcano-left.png"
+				frameCount: 23
+				frameWidth: width
+				frameHeight: height
+				frameRate: 5
+				x: 50
+				y: 198
+				width: 237
+				height: 111
+			}
+			AnimatedSprite  {
+				source: "images/map/island02-wave-center.png"
+				frameCount: 23
+				frameWidth: width
+				frameHeight: height
+				frameRate: 5
+				x: 637
+				y: 379
+				width: 244
+				height: 138
+			}
+			AnimatedSprite  {
+				source: "images/map/island02-wave-volcano-right.png"
+				frameCount: 23
+				frameWidth: width
+				frameHeight: height
+				frameRate: 5
+				x: 548
+				y: 174
+				width: 159
+				height: 58
+			}
+			AnimatedSprite  {
+				source: "images/map/island02-cascade-left.png"
+				frameCount: 3
+				frameWidth: width
+				frameHeight: height
+				frameRate: 10
+				x: 0
+				y: 305
+				width: 111
+				height: 115
+			}
+			AnimatedSprite  {
+				source: "images/map/island02-cascade-volcano.png"
+				frameCount: 3
+				frameWidth: width
+				frameHeight: height
+				frameRate: 10
+				x: 207
+				y: 25
+				width: 418
+				height: 209
+			}
 		}
 
 		AnimatedImage {
@@ -488,16 +610,170 @@ Rectangle {
 
 			HoveringEmitter {
 				system: particleSystem
-				x: 335
+				x: 325
 				y: 836
-				width: 290
-				deltaWidth: 140
+				width: 310
+				deltaWidth: 150
 				startDepth: 150
 				emitRate: 20
 				endSize: 180
 				lifeSpan: 1300
 				velocityMagnitude: 600
 				accelerationMagnitude: 60
+			}
+
+			Emitter {
+				system: particleSystem
+				group: "frontVapor"
+				x: 243
+				y: 687
+				width: 9
+				height: 27
+				shape: EllipseShape {}
+				emitRate: 3
+				lifeSpan: 5000
+				lifeSpanVariation: 1000
+				size: 70
+				endSize: 140
+				sizeVariation: 16
+				velocity: AngleDirection {
+					angle: -175
+					angleVariation: 10
+					magnitude: 32
+					magnitudeVariation: 9
+				}
+				acceleration: AngleDirection {
+					angle: -160
+					angleVariation: 9
+					magnitude: 10
+					magnitudeVariation: 3
+				}
+			}
+			Emitter {
+				system: particleSystem
+				group: "frontVapor"
+				x: 542
+				y: 703
+				width: 40
+				height: 40
+				shape: EllipseShape {}
+				emitRate: 3
+				lifeSpan: 5000
+				lifeSpanVariation: 1000
+				size: 60
+				endSize: 130
+				sizeVariation: 18
+				velocity: AngleDirection {
+					angle: 0
+					angleVariation: 10
+					magnitude: 30
+					magnitudeVariation: 8
+				}
+				acceleration: AngleDirection {
+					angle: -65
+					angleVariation: 11
+					magnitude: 8
+					magnitudeVariation: 2
+				}
+			}
+			Emitter {
+				system: particleSystem
+				group: "backVapor"
+				x: 770
+				y: 388
+				width: 8
+				height: 18
+				shape: EllipseShape {}
+				emitRate: 2
+				lifeSpan: 4000
+				lifeSpanVariation: 1000
+				size: 70
+				endSize: 140
+				sizeVariation: 16
+				velocity: AngleDirection {
+					angle: -20
+					angleVariation: 10
+					magnitude: 30
+					magnitudeVariation: 8
+				}
+				acceleration: AngleDirection {
+					angle: -60
+					angleVariation: 11
+					magnitude: 9
+					magnitudeVariation: 2
+				}
+			}
+			Emitter {
+				system: particleSystem
+				group: "backVapor"
+				x: 136
+				y: 380
+				width: 13
+				height: 27
+				shape: EllipseShape {}
+				emitRate: 2
+				lifeSpan: 4000
+				lifeSpanVariation: 1000
+				size: 90
+				endSize: 140
+				sizeVariation: 16
+				velocity: AngleDirection {
+					angle: -155
+					angleVariation: 10
+					magnitude: 32
+					magnitudeVariation: 9
+				}
+				acceleration: AngleDirection {
+					angle: -130
+					angleVariation: 9
+					magnitude: 10
+					magnitudeVariation: 3
+				}
+			}
+
+			AnimatedSprite  {
+				source: "images/map/island01-wave-low.png"
+				frameCount: 23
+				frameWidth: width
+				frameHeight: height
+				frameRate: 5
+				x: 90
+				y: 500
+				width: 523
+				height: 112
+			}
+			AnimatedSprite  {
+				source: "images/map/island01-wave-up.png"
+				frameCount: 23
+				frameWidth: width
+				frameHeight: height
+				frameRate: 5
+				x: 423
+				y: 327
+				width: 154
+				height: 147
+			}
+			AnimatedSprite  {
+				source: "images/map/island01-cascade-low.png"
+				frameCount: 3
+				frameWidth: width
+				frameHeight: height
+				frameRate: 10
+				x: 0
+				y: 439
+				width: 901
+				height: 299
+			}
+			AnimatedSprite  {
+				source: "images/map/island01-cascade-up.png"
+				frameCount: 3
+				frameWidth: width
+				frameHeight: height
+				frameRate: 10
+				x: 514
+				y: 299
+				width: 64
+				height: 65
 			}
 		}
 	}
