@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 import QtMultimedia 5.5
 import Qt.labs.settings 1.0
 import "qrc:/thymio-ar" as AR
@@ -287,7 +288,7 @@ ApplicationWindow {
 		}
 
 		ColumnLayout {
-			spacing: 20
+			spacing: 16
 
 			Label {
 				text: saveProgramDialog.isSave ? "Save the program?" : "Load a program?"
@@ -295,31 +296,45 @@ ApplicationWindow {
 				font.pointSize: 21
 			}
 
-			Frame {
-				ListView {
-					clip: true
-					contentWidth: implicitWidth
-					contentHeight: contentItem.childrenRect.height
-					implicitHeight: 140
-					implicitWidth: 200
-					spacing: 12
-					model: programList
-					delegate: Label {
-						text: name
-						width: parent.width
-						MouseArea {
-							anchors.fill: parent
-							onClicked: programName.text = parent.text;
+			Component {
+				id: listHighlight
+				Rectangle {
+					color: Material.accentColor
+					radius: 5
+				}
+			}
+
+			ListView {
+				id: list
+				clip: true
+				contentWidth: implicitWidth
+				contentHeight: contentItem.childrenRect.height
+				implicitHeight: saveProgramDialog.isSave ? 100 : 150
+				implicitWidth: 300
+				spacing: 8
+				model: programList
+				delegate: Label {
+					text: name
+					padding: 6
+					width: parent.width
+					MouseArea {
+						anchors.fill: parent
+						onClicked: {
+							programName.text = parent.text;
+							if (!saveProgramDialog.isSave) {
+								list.currentIndex = index;
+							}
 						}
 					}
 				}
+				highlight: saveProgramDialog.isSave ? null : listHighlight
 			}
 
 			TextField {
 				id: programName
-				readOnly: !saveProgramDialog.isSave
 				anchors.left: parent.left
 				anchors.right: parent.right
+				visible: saveProgramDialog.isSave
 			}
 
 			RowLayout {
@@ -335,7 +350,7 @@ ApplicationWindow {
 				Button {
 					id: okButton2
 					text: saveProgramDialog.isSave ? "Save" : "Load"
-					enabled: saveProgramDialog.isSave || programName.text !== ""
+					enabled: programName.text !== ""
 					onClicked: {
 						if (saveProgramDialog.isSave) {
 							vplEditor.saveProgram(programName.text);
