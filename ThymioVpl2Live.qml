@@ -8,6 +8,10 @@ Item {
 	property alias vplEditor: editor
 	property alias vision: vision
 
+	Component.onDestruction: {
+		camera.stop();
+	}
+
 	Connections {
 		target: aseba
 		onUserMessage: {

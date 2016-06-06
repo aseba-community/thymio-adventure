@@ -14,6 +14,14 @@ Item {
 	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
 	property real targetRadius: 0.1
 
+	Component.onCompleted: {
+		camera.start();
+	}
+
+	Component.onDestruction: {
+		camera.stop();
+	}
+
 	Thymio {
 		variables : ({
 			"motor.left.target": motorLeftTarget.value,

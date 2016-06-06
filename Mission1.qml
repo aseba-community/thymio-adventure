@@ -11,6 +11,16 @@ Item {
 	property vector2d robotPosition2d: robotPosition3d.toVector2d().times(1 / robotPosition3d.z)
 	property real robotDistance: robotPosition2d.length()
 
+	// FIXME: move this feature of starting/stopping camera in its own file
+
+	Component.onCompleted: {
+		camera.start();
+	}
+
+	Component.onDestruction: {
+		camera.stop();
+	}
+
 	Vision {
 		id: vision
 		landmarks: Landmark {
