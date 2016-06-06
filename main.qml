@@ -107,6 +107,7 @@ ApplicationWindow {
 	Camera {
 		id: camera
 		captureMode: Camera.CaptureViewfinder
+		cameraState: Camera.LoadedState
 		//deviceId: QtMultimedia.availableCameras[1].deviceId // hack to use second camera on laptop
 	}
 
