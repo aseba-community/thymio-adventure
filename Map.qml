@@ -1,17 +1,47 @@
 import QtQuick 2.6
 import QtQuick.Particles 2.0
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import "qrc:/thymio-vpl2" as VPL2
 import "widgets"
 
 Rectangle {
-	color: "#808080"
+
+	// background gradient
+	gradient: Gradient {
+		GradientStop {
+			position: 0.00;
+			color: "#0c0e57";
+		}
+		GradientStop {
+			position: 0.66;
+			color: "#17abbc";
+		}
+		GradientStop {
+			position: 1.00;
+			color: "#f7f8d1";
+		}
+	}
+
+	// background clouds
+	AnimatedImageX {
+		x1: -30
+		x2: 0
+		y: 0
+		width: parent.width + 30
+		height: width * 0.310
+		source: "images/map/clouds-back.png"
+		duration: 7000
+	}
 
 	// the drawing of the map
 	Item {
 		width: 2827
 		height: 2050
-		transformOrigin: Item.TopLeft
-		scale: Math.min(parent.width / width, parent.height / height)
+		transformOrigin: Item.BottomLeft
+		// FIXME: cleanup computation of size of misison list at right-side of the screen
+		scale: Math.min((parent.width - 200) / width, parent.height / height)
+		anchors.bottom: parent.bottom
 
 		// general particles
 
@@ -46,6 +76,12 @@ Rectangle {
 			groups: "frontVapor"
 			z: 2
 		}
+		VaporImageParticle {
+			system: particleSystem
+			groups: "volcanoVapor"
+			source: "../images/map/vapor-particle-volcano.png"
+			z: 2
+		}
 		ImageParticle {
 			source: "images/map/snow-particle.png"
 			system: particleSystem
@@ -55,7 +91,7 @@ Rectangle {
 
 		// islands
 
-		AnimatedImage {
+		AnimatedImageY {
 			source: "images/map/island03.png"
 			x: 1700
 			duration: 4000
@@ -105,49 +141,27 @@ Rectangle {
 			}
 		}
 
-		AnimatedImage {
+		AnimatedImageY {
 			source: "images/map/island04.png"
 			x: 300
 			duration: 4000
 			y1: 130
 			y2: 110
 
-			Image {
-				x: -78
+			AnimatedImageX {
+				x1: -78
+				x2: -58
 				y: 208
 				source: "images/map/island04-blocks-left.png"
-				SequentialAnimation on x {
-					loops: Animation.Infinite
-					NumberAnimation {
-						to: -58
-						duration: 4000
-						easing.type: Easing.InOutSine
-					}
-					NumberAnimation {
-						to: -78
-						duration: 4000
-						easing.type: Easing.InOutSine
-					}
-				}
+				duration: 4000
 			}
 
-			Image {
-				x: 640
+			AnimatedImageX {
+				x1: 640
+				x2: 615
 				y: 450
 				source: "images/map/island04-blocks-right.png"
-				SequentialAnimation on x {
-					loops: Animation.Infinite
-					NumberAnimation {
-						to: 615
-						duration: 4000
-						easing.type: Easing.InOutSine
-					}
-					NumberAnimation {
-						to: 640
-						duration: 4000
-						easing.type: Easing.InOutSine
-					}
-				}
+				duration: 4000
 			}
 
 			Emitter {
@@ -244,7 +258,18 @@ Rectangle {
 			}
 		}
 
-		AnimatedImage {
+		// middle clouds
+		AnimatedImageX {
+			x1: 0.1 * parent.width
+			x2: -0.1 * parent.width
+			y: 0.2 * parent.height
+			width: parent.width * 1.2
+			height: width * 0.346
+			source: "images/map/clouds-middle.png"
+			duration: 7000
+		}
+
+		AnimatedImageY {
 			source: "images/map/island02.png"
 			x: 1152
 			duration: 5000
@@ -302,7 +327,7 @@ Rectangle {
 
 			Emitter {
 				system: particleSystem
-				group: "frontVapor"
+				group: "volcanoVapor"
 				x: 338
 				y: 13
 				width: 140
@@ -329,7 +354,7 @@ Rectangle {
 			}
 			Emitter {
 				system: particleSystem
-				group: "frontVapor"
+				group: "volcanoVapor"
 				x: 211
 				y: 135
 				width: 30
@@ -356,7 +381,7 @@ Rectangle {
 			}
 			Emitter {
 				system: particleSystem
-				group: "frontVapor"
+				group: "volcanoVapor"
 				x: 591
 				y: 128
 				width: 20
@@ -601,7 +626,7 @@ Rectangle {
 			}
 		}
 
-		AnimatedImage {
+		AnimatedImageY {
 			source: "images/map/island01.png"
 			x: 151
 			duration: 4000
@@ -778,22 +803,142 @@ Rectangle {
 		}
 	}
 
+	// foreground clouds
+
+	AnimatedImageX {
+		x1: 0
+		x2: -60
+		anchors.bottom: parent.bottom
+		width: parent.width + 60
+		height: width * 0.234
+		source: "images/map/clouds-front.png"
+		duration: 7000
+	}
+
 	// list of missions
 
-	Column {
-		anchors.right: parent.right
-		anchors.top: parent.top
-		anchors.bottom: parent.bottom
-		padding: 16
+	ListModel {
+		id: missionsList
 
-		Repeater {
-			model: [
-				{ name: "Mission 1", source: "Mission1.qml" },
-				{ name: "Mission 2", source: "Mission2.qml" },
-			]
+		ListElement {
+			name: qsTr("Hello, anyone?");
+			source: "Mission1.qml";
+			locked: false
+			successRate: 2
+		}
+		ListElement {
+			name: qsTr("Out of the cave");
+			source: "Mission2.qml";
+			locked: false
+			successRate: 1
+		}
+		ListElement {
+			name: qsTr("The platforms");
+			source: "Mission2.qml";
+			locked: false
+			successRate: 0
+		}
+		ListElement {
+			name: qsTr("lorem");
+			source: "Mission2.qml";
+			locked: true
+			successRate: 0
+		}
+	}
+
+	// view of liste of missions
+
+	ListView {
+		id: missionsView
+		anchors.right: parent.right
+		anchors.rightMargin: 20
+		anchors.top: parent.top
+		anchors.topMargin: 20
+		anchors.bottom: parent.bottom
+		anchors.bottomMargin: 130
+		width: 180
+		spacing: 12
+
+		model: missionsList
+		delegate: Row {
+			id: row
+			spacing: 8
+			padding: 0
 			Button {
-				text: modelData.name
-				onClicked: loader.source = modelData.source;
+				id: control
+				implicitWidth: 160
+				text: missionsList.get(index).locked ? "<img src=\"qrc:/images/ic_lock_white_24px.svg\" />" :  index + '. ' + name
+				background: Rectangle {
+					color: control.highlighted ? "#30efff16" : "#30ffffff"
+					border.color: control.highlighted ? "#a0efff16" : "#50ffffff"
+					radius: 5
+				}
+				contentItem: Text {
+					text: control.text
+					font: control.font
+					color: control.highlighted ? "#efff16" : Material.primaryTextColor
+					horizontalAlignment: Text.AlignHCenter
+					verticalAlignment: Text.AlignVCenter
+					elide: Text.ElideRight
+				}
+				onClicked: missionsView.currentIndex = index;
+				highlighted: row.ListView.isCurrentItem
+			}
+		}
+	}
+
+	// mission summary
+
+	Pane {
+		id: missionSummary
+		anchors.right: parent.right
+		anchors.rightMargin: 20
+		anchors.bottom: parent.bottom
+		anchors.bottomMargin: 20
+		height: 70
+		width: missionsView.width
+		visible: missionsView.currentIndex !== -1
+
+		background: Rectangle {
+			color: "#30ffffff"
+			border.color: "#50ffffff"
+			radius: 5
+		}
+		Row {
+			Repeater {
+				model: 3
+				VPL2.HDPIImage {
+					source: (missionsView.currentIndex !== -1 && missionsList.get(missionsView.currentIndex).successRate > index) ?
+						"images/ic_star_rate_yellow_18px.svg" :
+						"images/ic_star_rate_white_18px.svg"
+					width: 24
+					height: 24
+				}
+			}
+		}
+
+		Button {
+			anchors.right: parent.right
+			width: 44
+			height: 44
+			background: Rectangle {
+				color: "white"
+				width: 44
+				height: 44
+				radius: 22
+			}
+			contentItem: VPL2.HDPIImage {
+				source: "images/ic_play_arrow_black_24px.svg"
+				width: 24
+				height: 24
+			}
+			padding: 10
+			leftPadding: padding
+			rightPadding: padding
+			onClicked: {
+				if (missionsView.currentIndex !== -1) {
+					loader.source = missionsList.get(missionsView.currentIndex).source;
+				}
 			}
 		}
 	}

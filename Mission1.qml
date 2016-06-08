@@ -33,8 +33,8 @@ Item {
 	Scene3d {
 		anchors.fill: parent
 		camera: landmark.pose
-		Grotte {
-			id: grotte
+		Cave {
+			id: cave
 			enabled: false
 		}
 	}
@@ -122,7 +122,7 @@ Item {
 		ThymioSays { message: "The last thing I remember is entering in a cave." }
 		ThymioSays {
 			onEnabledChanged: if (enabled) {
-				grotte.enabled = true;
+				cave.enabled = true;
 			}
 			message: "Oh yeah, that’s it. A cave. It seems cold."
 		}

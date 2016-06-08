@@ -17,7 +17,7 @@
         <file>storytelling/ThymioSays.qml</file>
         <file>storytelling/Choice.qml</file>
         <file>storytelling/Dialogue.qml</file>
-        <file>Grotte.qml</file>
+        <file>Cave.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>images/ic_menu_white_24px.svg</file>
         <file>images/ic_ar_mode_white_24px.svg</file>
@@ -36,7 +36,7 @@
         <file>images/map/island03.png</file>
         <file>images/map/island02.png</file>
         <file>images/map/island04.png</file>
-        <file>widgets/AnimatedImage.qml</file>
+        <file>widgets/AnimatedImageY.qml</file>
         <file>images/map/vapor-particle.png</file>
         <file>widgets/VaporImageParticle.qml</file>
         <file>images/map/sustain-particle.png</file>
@@ -59,5 +59,15 @@
         <file>images/map/island02-wave-volcano-left.png</file>
         <file>images/map/island02-wave-volcano-right.png</file>
         <file>images/map/island02-cascade-bottom-left.png</file>
+        <file>images/map/vapor-particle-volcano.png</file>
+        <file>images/map/vapor-particle-volcano.svg</file>
+        <file>widgets/AnimatedImageX.qml</file>
+        <file>images/map/clouds-back.png</file>
+        <file>images/map/clouds-front.png</file>
+        <file>images/ic_lock_white_24px.svg</file>
+        <file>images/ic_star_rate_white_18px.svg</file>
+        <file>images/ic_star_rate_yellow_18px.svg</file>
+        <file>images/ic_play_arrow_black_24px.svg</file>
+        <file>images/map/clouds-middle.png</file>
     </qresource>
 </RCC>

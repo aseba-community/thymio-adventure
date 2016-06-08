@@ -5,7 +5,7 @@ RESOURCES += thymio-adventure.qrc
 include(thymio-ar/thymio-ar.pri)
 include(deployment.pri)
 
-QT3D_MODELS += assets/Grotte.dae
+QT3D_MODELS += assets/cave.dae
 QGLTF_PARAMS = -g
 load(qgltf)
 

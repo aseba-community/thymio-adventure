@@ -36,6 +36,7 @@ Item {
 		anchors.fill: parent
 		camera: landmark.pose
 		// TODO: add AR objects here for free play
+		Cave {}
 	}
 
 	Connections {
