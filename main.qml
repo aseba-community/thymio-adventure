@@ -41,7 +41,7 @@ ApplicationWindow {
 			}
 
 			Repeater {
-				model: vision ? vision.landmarks : 0
+				model: (camera.cameraStatus === Camera.ActiveStatus && vision) ? vision.landmarks : 0
 				delegate: ToolButton {
 					contentItem: Item {
 						Image {
