@@ -301,7 +301,7 @@ ApplicationWindow {
 				id: listHighlight
 				Rectangle {
 					color: Material.accentColor
-					radius: 5
+					radius: 2
 				}
 			}
 
@@ -312,23 +312,19 @@ ApplicationWindow {
 				contentHeight: contentItem.childrenRect.height
 				implicitHeight: saveProgramDialog.isSave ? 100 : 150
 				implicitWidth: 300
-				spacing: 8
 				model: programList
-				delegate: Label {
+				delegate: ItemDelegate {
 					text: name
-					padding: 6
 					width: parent.width
-					MouseArea {
-						anchors.fill: parent
-						onClicked: {
-							programName.text = parent.text;
-							if (!saveProgramDialog.isSave) {
-								list.currentIndex = index;
-							}
+					onClicked: {
+						programName.text = text;
+						if (!saveProgramDialog.isSave) {
+							list.currentIndex = index;
 						}
 					}
 				}
 				highlight: saveProgramDialog.isSave ? null : listHighlight
+				ScrollIndicator.vertical: ScrollIndicator { }
 			}
 
 			TextField {
