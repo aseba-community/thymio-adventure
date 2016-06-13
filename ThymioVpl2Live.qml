@@ -12,17 +12,6 @@ Item {
 		camera.stop();
 	}
 
-	Connections {
-		target: aseba
-		onUserMessage: {
-			if (type === 0) {
-				editor.execBlock(data[0], !!data[1]);
-			} else if (type === 1) {
-				editor.execLink(data[0], data[1]);
-			}
-		}
-	}
-
 	AR.Vision {
 		id: vision
 		landmarks: AR.Landmark {

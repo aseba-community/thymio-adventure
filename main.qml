@@ -363,11 +363,21 @@ ApplicationWindow {
 
 	AR.Aseba {
 		id: aseba
+		onUserMessage: {
+			if (type !== 0) {
+				return;
+			}
+			if (vplEditor === undefined) {
+				return;
+			}
+			vplEditor.compiler.execTransition(data[0], data[1]);
+		}
 	}
 
 	AR.Thymio {
 		id: thymio
 		program: playing ? vplEditor.compiler.source : ""
 		onNodeChanged: playing = false
+		onPlayingChanged: if (vplEditor !== undefined) { vplEditor.compiler.execReset(playing); }
 	}
 }
