@@ -59,23 +59,8 @@ ApplicationWindow {
 				}
 			}
 
-			Label {
-				id: compilationLabel
-				text: {
-					if (!vplEditor)
-						return "";
-					else  if (vplEditor.minimized)
-						return "AR Running" ;
-					else if (vplEditor.compiler.error === "")
-						return "Compilation success";
-					else
-						return "Compilation error: " + vplEditor.compiler.error;
-				}
-				horizontalAlignment: Text.AlignHCenter
-				font.pixelSize: 20
-				elide: Label.ElideRight
-				verticalAlignment: Text.AlignVCenter
-				Layout.fillWidth: true
+			VPL2.CompilationLabel {
+				vplEditor: window.vplEditor
 			}
 
 			ToolButton {
@@ -138,6 +123,7 @@ ApplicationWindow {
 		ListElement { title: qsTr("free play"); source: "ThymioVpl2Live.qml" ; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("load program"); save: false; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("save program"); save: true; icon: "images/ic_freeplay_white_24px.svg" }
+		ListElement { title: qsTr("new program"); newProgram: true; icon: "images/ic_freeplay_white_24px.svg" }
 		ListElement { title: qsTr("about"); source: "About.qml" ; icon: "images/ic_info_white_24px.svg" }
 	}
 
@@ -169,7 +155,7 @@ ApplicationWindow {
 							text: model.title
 							font.pixelSize: 14
 							font.weight: Font.Medium
-							color: "white"
+							color: Material.primaryTextColor
 							opacity: enabled ? 1.0 : 0.5
 						}
 					}
@@ -186,11 +172,17 @@ ApplicationWindow {
 					}
 					onClicked: {
 						if (source === undefined) {
-							// load/save dialog
-							saveProgramDialog.isSave = save;
-							saveProgramDialog.visible = true;
+							if (newProgram === true) {
+								// new program
+								vplEditor.clearProgram();
+								saveProgramDialog.programName = "";
+							} else {
+								// load/save dialog
+								saveProgramDialog.isSave = save;
+								saveProgramDialog.visible = true;
+							}
 						} else {
-							// link to a QML file
+							// link to a QML file, load this file
 							if (listView.currentIndex != index) {
 								listView.currentIndex = index;
 								loader.source = source;
@@ -205,164 +197,19 @@ ApplicationWindow {
 		}
 	}
 
-	Popup {
+	VPL2.DashelTargetDialog {
 		id: dashelTargetSelector
-		x: (window.width - width) / 2
-		y: window.height / 6
-		modal: true
-		focus: true
-		closePolicy: Popup.OnEscape | Popup.OnPressOutside
-
-		onVisibleChanged: {
-			if (visible) {
-				textInput.text = aseba.target;
-			}
-		}
-
-		ColumnLayout {
-			spacing: 20
-
-			Label {
-				text: "Set Dashel target"
-				font.weight: Font.Medium
-				font.pointSize: 21
-			}
-
-			TextField {
-				id: textInput
-				implicitWidth: 280
-			}
-
-			RowLayout {
-				spacing: 16
-				Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-
-				Button {
-					id: cancelButton
-					text: "Cancel"
-					onClicked: {
-						dashelTargetSelector.close();
-					}
-				}
-
-				Button {
-					id: okButton
-					text: "Ok"
-					onClicked: {
-						aseba.target = textInput.text;
-						dashelTargetSelector.close();
-					}
-				}
-			}
-		}
+		aseba: aseba
 	}
 
-	Popup {
+	VPL2.LoadSaveDialog {
 		id: saveProgramDialog
-		x: (parent.width - width) / 2
-		y: (parent.height - height) / 2
-		modal: true
-		focus: true
-		closePolicy: Popup.OnEscape | Popup.OnPressOutside
-
-		property bool isSave
-
-		ListModel {
-			id: programList
-		}
-
-		onVisibleChanged: {
-			if (visible) {
-				// update list of programs
-				programList.clear();
-				var foundCurrent = false;
-				var programs = vplEditor.listPrograms();
-				for (var i = 0; i < programs.length; ++i) {
-					var name = programs[i].name;
-					programList.append({ "name":  name });
-					if (name === programName.text)
-						foundCurrent = true;
-				}
-				if (!foundCurrent)
-					programName.text = "";
-			}
-		}
-
-		ColumnLayout {
-			spacing: 16
-
-			Label {
-				text: saveProgramDialog.isSave ? "Save the program?" : "Load a program?"
-				font.weight: Font.Medium
-				font.pointSize: 21
-			}
-
-			Component {
-				id: listHighlight
-				Rectangle {
-					color: Material.accentColor
-					radius: 2
-				}
-			}
-
-			ListView {
-				id: list
-				clip: true
-				contentWidth: implicitWidth
-				contentHeight: contentItem.childrenRect.height
-				implicitHeight: saveProgramDialog.isSave ? 100 : 150
-				implicitWidth: 300
-				model: programList
-				delegate: ItemDelegate {
-					text: name
-					width: parent.width
-					onClicked: {
-						programName.text = text;
-						if (!saveProgramDialog.isSave) {
-							list.currentIndex = index;
-						}
-					}
-				}
-				highlight: saveProgramDialog.isSave ? null : listHighlight
-				ScrollIndicator.vertical: ScrollIndicator { }
-			}
-
-			TextField {
-				id: programName
-				anchors.left: parent.left
-				anchors.right: parent.right
-				visible: saveProgramDialog.isSave
-			}
-
-			RowLayout {
-				spacing: 16
-				Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-
-				Button {
-					id: cancelButton2
-					text: "Cancel"
-					onClicked: saveProgramDialog.close()
-				}
-
-				Button {
-					id: okButton2
-					text: saveProgramDialog.isSave ? "Save" : "Load"
-					enabled: programName.text !== ""
-					onClicked: {
-						if (saveProgramDialog.isSave) {
-							vplEditor.saveProgram(programName.text);
-						} else {
-							vplEditor.loadProgram(programName.text);
-						}
-						saveProgramDialog.close();
-					}
-				}
-			}
-		}
+		vplEditor: window.vplEditor
 	}
 
-	AR.Aseba {
+	VPL2.Aseba {
 		id: aseba
+		onTargetChanged: console.log("target", target)
 		onUserMessage: {
 			if (type !== 0) {
 				return;
@@ -374,7 +221,7 @@ ApplicationWindow {
 		}
 	}
 
-	AR.Thymio {
+	VPL2.Thymio {
 		id: thymio
 		program: playing ? vplEditor.compiler.source : ""
 		onNodeChanged: playing = false
