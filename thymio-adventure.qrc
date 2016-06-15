@@ -1,9 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>Screen0.qml</file>
-        <file>Screen0Form.ui.qml</file>
-        <file>Screen1.qml</file>
         <file>assets/marker.xml</file>
         <file>ThymioRemoteControl.qml</file>
         <file>ThymioAeslLive.qml</file>
