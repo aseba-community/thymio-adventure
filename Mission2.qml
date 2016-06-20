@@ -2,6 +2,7 @@ import QtQuick 2.6
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.0
 import "qrc:/thymio-ar"
+import "qrc:/thymio-vpl2"
 import "qrc:/storytelling"
 
 Item {
