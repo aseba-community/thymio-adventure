@@ -33,6 +33,7 @@ Item {
 	Scene3d {
 		anchors.fill: parent
 		camera: landmark.pose
+		lens: vision.lens
 		Cave {
 			id: cave
 			enabled: false
