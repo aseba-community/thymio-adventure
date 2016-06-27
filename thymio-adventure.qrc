@@ -66,5 +66,6 @@
         <file>images/ic_star_rate_yellow_18px.svg</file>
         <file>images/ic_play_arrow_black_24px.svg</file>
         <file>images/map/clouds-middle.png</file>
+        <file>Mission3.qml</file>
     </qresource>
 </RCC>

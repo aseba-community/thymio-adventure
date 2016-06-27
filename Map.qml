@@ -834,7 +834,7 @@ Rectangle {
 		}
 		ListElement {
 			name: qsTr("The platforms");
-			source: "Mission2.qml";
+			source: "Mission3.qml";
 			locked: false
 			successRate: 0
 		}
