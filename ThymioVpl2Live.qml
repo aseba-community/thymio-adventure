@@ -24,6 +24,7 @@ Item {
 	AR.Scene3d {
 		anchors.fill: parent
 		camera: landmark.pose
+		lens: vision.lens
 		// TODO: add AR objects here for free play
 		Cave {}
 	}
