@@ -223,7 +223,8 @@ ApplicationWindow {
 
 	VPL2.Thymio {
 		id: thymio
-		program: playing ? vplEditor.compiler.source : ""
+		events: vplEditor ? vplEditor.compiler.events : {}
+		source: playing ? vplEditor.compiler.source : ""
 		onNodeChanged: playing = false
 		onPlayingChanged: if (vplEditor !== undefined) { vplEditor.compiler.execReset(playing); }
 		onErrorChanged: if (error !== "") { vplEditor.compiler.error = error; }
