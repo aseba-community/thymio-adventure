@@ -226,7 +226,7 @@ ApplicationWindow {
 		property bool playing: false
 		events: vplEditor ? vplEditor.compiler.events : {}
 		source: playing ? vplEditor.compiler.source : ""
-		onNodeChanged: playing = false
+		onNodeChanged: if (!playing) { playing = false; }
 		onPlayingChanged: if (vplEditor !== undefined) { vplEditor.compiler.execReset(playing); }
 		onErrorChanged: if (error !== "") { vplEditor.compiler.error = error; }
 	}

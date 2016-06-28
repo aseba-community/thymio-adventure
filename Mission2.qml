@@ -23,13 +23,6 @@ Item {
 		camera.stop();
 	}
 
-	Thymio {
-		variables : ({
-			"motor.left.target": motorLeftTarget.value,
-			"motor.right.target": motorRightTarget.value
-		})
-	}
-
 	Vision {
 		id: _vision
 		landmarks: Landmark {
@@ -82,6 +75,24 @@ Item {
 		id: controls
 		visible: false
 		enabled: false
+
+		onEnabledChanged: if (enabled) {
+			thymio.events = {
+				"setMotorTarget": 2,
+			};
+			thymio.source =
+			    "onevent setMotorTarget" + "\n" +
+			    "motor.left.target = event.args[0]" + "\n" +
+			    "motor.right.target = event.args[1]" + "\n";
+		}
+		Timer {
+			interval: 100
+			running: controls.enabled
+			repeat: true
+			onTriggered: {
+				aseba.emit(0, [motorLeftTarget.value, motorRightTarget.value]);
+			}
+		}
 
 		mouseEnabled: false
 
