@@ -5,7 +5,7 @@ import "qrc:/thymio-vpl2"
 Item {
 	Thymio {
         id: thymio
-        program: text.text
+		source: text.text
     }
 
     TextArea {
