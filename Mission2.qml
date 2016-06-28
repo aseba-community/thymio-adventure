@@ -11,8 +11,8 @@ Item {
 	readonly property int motorMin: -500
 	readonly property int motorMax: 500
 
-	property vector3d robotPos: vision.robotPose.times(Qt.vector3d(0, 0, 0))
-	property vector3d targetCenter: Qt.vector3d(0, -0.5, 0)
+	property vector2d robotPos: vision.robotPose.times(Qt.vector3d(0, 0, 0)).toVector2d()
+	property vector2d targetCenter: Qt.vector2d(0, -0.5)
 	property real targetRadius: 0.1
 
 	Component.onCompleted: {
