@@ -6,7 +6,7 @@ import "qrc:/thymio-vpl2"
 import "qrc:/storytelling"
 
 Item {
-	readonly property Vision vision: vision
+	readonly property Vision vision: _vision
 
 	readonly property int motorMin: -500
 	readonly property int motorMax: 500
@@ -31,7 +31,7 @@ Item {
 	}
 
 	Vision {
-		id: vision
+		id: _vision
 		landmarks: Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -43,6 +43,7 @@ Item {
 		anchors.fill: parent
 		camera: landmark.pose
 		lens: vision.lens
+		robotPose: vision.robotPose
 		Cave {}
 	}
 

@@ -5,7 +5,7 @@ import "qrc:/thymio-ar"
 import "qrc:/storytelling"
 
 Item {
-	readonly property Vision vision: vision
+	readonly property Vision vision: _vision
 
 	property vector3d robotPosition3d: vision.robot.pose.times(Qt.vector3d(0, 0, 0))
 	property vector2d robotPosition2d: robotPosition3d.toVector2d().times(1 / robotPosition3d.z)
@@ -22,7 +22,7 @@ Item {
 	}
 
 	Vision {
-		id: vision
+		id: _vision
 		landmarks: Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -34,6 +34,7 @@ Item {
 		anchors.fill: parent
 		camera: landmark.pose
 		lens: vision.lens
+		robotPose: vision.robotPose
 		Cave {
 			id: cave
 			enabled: false

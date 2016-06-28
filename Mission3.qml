@@ -4,7 +4,7 @@ import "qrc:/thymio-ar"
 import "qrc:/storytelling"
 
 Item {
-	readonly property Vision vision: vision
+	readonly property Vision vision: _vision
 
 	// FIXME: move this feature of starting/stopping camera in its own file
 
@@ -17,7 +17,7 @@ Item {
 	}
 
 	Vision {
-		id: vision
+		id: _vision
 		landmarks: Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -29,6 +29,7 @@ Item {
 		anchors.fill: parent
 		camera: landmark.pose
 		lens: vision.lens
+		robotPose: vision.robotPose
 	}
 
 	Dialogue {

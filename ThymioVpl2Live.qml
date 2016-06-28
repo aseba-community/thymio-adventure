@@ -6,14 +6,14 @@ import "qrc:/thymio-ar" as AR
 Item {
 	id: live
 	property alias vplEditor: editor
-	property alias vision: vision
+	property alias vision: _vision
 
 	Component.onDestruction: {
 		camera.stop();
 	}
 
 	AR.Vision {
-		id: vision
+		id: _vision
 		landmarks: AR.Landmark {
 			id: landmark
 			fileName: ":/assets/marker.xml"
@@ -25,8 +25,9 @@ Item {
 		anchors.fill: parent
 		camera: landmark.pose
 		lens: vision.lens
-		// TODO: add AR objects here for free play
+		robotPose: vision.robotPose
 		Cave {}
+		// TODO: add AR objects here for free play
 	}
 
 	Connections {
