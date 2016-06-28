@@ -1,10 +1,10 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
  import QtQuick.Controls 1.4
-import "qrc:/thymio-ar" as AR
+import "qrc:/thymio-vpl2"
 
 Item {
-    AR.Thymio {
+	Thymio {
         variables : ({
             "motor.left.target": motorLeftTarget.value,
             "motor.right.target": motorRightTarget.value

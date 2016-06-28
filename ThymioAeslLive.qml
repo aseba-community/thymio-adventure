@@ -1,9 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "qrc:/thymio-ar" as AR
+import "qrc:/thymio-vpl2"
 
 Item {
-    AR.Thymio {
+	Thymio {
         id: thymio
         program: text.text
     }
