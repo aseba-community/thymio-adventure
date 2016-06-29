@@ -41,6 +41,12 @@ Item {
 	}
 
 	Dialogue {
+//		ThymioLookAt {
+//			poseOk: vision.robot.found && landmark.found
+//			pose: vision.robotPose
+//			eye: Qt.vector2d(0.1, 0.1)
+//			center: targetCenter
+//		}
 		// TODO: move erratically
 		ThymioSays { message: "That’s a problem. It seems I don’t have a good control on my motors…" }
 		ThymioSays { message: "… and I don’t see anything in here." }
