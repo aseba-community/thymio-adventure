@@ -12,7 +12,7 @@ Item {
 	readonly property int motorMax: 500
 
 	property vector2d robotPos: vision.robotPose.times(Qt.vector3d(0, 0, 0)).toVector2d()
-	property vector2d targetCenter: Qt.vector2d(0, -0.5)
+	property vector2d targetCenter: Qt.vector2d(0.5, 0)
 	property real targetRadius: 0.1
 
 	Component.onCompleted: {
@@ -41,12 +41,12 @@ Item {
 	}
 
 	Dialogue {
-//		ThymioLookAt {
-//			poseOk: vision.robot.found && landmark.found
-//			pose: vision.robotPose
-//			eye: Qt.vector2d(0.1, 0.1)
-//			center: targetCenter
-//		}
+		ThymioLookAt {
+			poseOk: vision.robot.found && landmark.found
+			pose: vision.robotPose
+			eye: Qt.vector2d(-0.1, -0.1)
+			center: targetCenter
+		}
 		// TODO: move erratically
 		ThymioSays { message: "That’s a problem. It seems I don’t have a good control on my motors…" }
 		ThymioSays { message: "… and I don’t see anything in here." }
