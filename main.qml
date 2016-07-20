@@ -221,6 +221,11 @@ ApplicationWindow {
 		}
 	}
 
+	Connections {
+		target: vplEditor ? vplEditor.compiler : null
+		onSourceChanged: thymio.playing = false
+	}
+
 	VPL2.Thymio {
 		id: thymio
 		property bool playing: false
