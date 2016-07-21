@@ -12,7 +12,6 @@ import "qrc:/thymio-vpl2" as VPL2
 ApplicationWindow {
 	id: window
 	title: qsTr("Thymio Adventure")
-	visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
 	visible: true
 	width: 960
 	height: 600
