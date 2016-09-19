@@ -2,7 +2,7 @@
 
 An interactive tutoring to learning programming using the [Thymio robot](http://thymio.org) and Augmented Reality.
 
-## Authors and liencense
+## Authors and license
 
 Please see the files [AUTHORS.md](AUTHORS.md) and [LICENSE.md](LICENSE.md).
 
