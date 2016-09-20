@@ -34,12 +34,12 @@ If you use another version, some packages might have different names or the comp
 First, install a development environment.
 In a terminal, type:
 ```sh
-sudo apt-get install build-essential cmake-gui mesa-common-dev libglu1-mesa-dev git gitk libeigen3-dev
+sudo apt-get install build-essential cmake-gui mesa-common-dev libglu1-mesa-dev git gitk libeigen3-dev libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libtiff-dev libjasper-dev libudev-dev
 ```
 
 Then, install Qt 5 and Qt creator.
 Go on the [QT5 open source download page](https://www.qt.io/download-open-source/), and download the installer.
-Run it in a terminal:
+Run it in a terminal (the exact name of the file might change slightly):
 ```sh
 chmod +x qt-unified-linux-x64-online.run
 ./qt-unified-linux-x64-online.run
@@ -47,9 +47,9 @@ chmod +x qt-unified-linux-x64-online.run
 
 Then, install and compile OpenCV.
 Go on the [OpenCV download page](http://opencv.org/downloads.html), and download the Linux archive for version 3.X.
-Unzip and compile it; in a terminal:
+Unzip and compile it; in a terminal in the OpenCV directory:
 ```sh
-cmake . && make
+mkdir -p build && cd build && cmake .. && make
 ```
 
 You now have a development environment ready to compile Thymio Programming Adventure on Ubuntu.
@@ -58,7 +58,7 @@ You now have a development environment ready to compile Thymio Programming Adven
 
 Download it with git and update submodules:
 ```sh
-git clone https://github.com/aseba-community/thymio-adventure.git
+git clone --recursive https://github.com/aseba-community/thymio-adventure.git
 cd thymio-adventure
 ./submodule-update.sh
 ```
@@ -67,7 +67,9 @@ cd thymio-adventure
 
 Launch Qt Creator and open `thymio-adventure.pro`.
 
-Go to the _Projects_ tab, go to _Desktop [...]_, select _Build_.
+Go to the _Projects_ tab, click _Configure Project_.
+
+Still in the _Projects_ tab, go to _Desktop [...]_, select _Build_.
 In _Build Steps_, click _Details_ on the _qmake_ pane.
 
 In the additional arguments field, add:
@@ -76,7 +78,7 @@ In the additional arguments field, add:
 ```
 
 where `YOUR_OPENCV_SRC` is where you have unzipped OpenCV, and `YOUR_OPENCV_BIN` is where you have built it.
-By default, `YOUR_OPENCV_BIN` is `YOUR_OPENCV_SRC/build`.
+If you followed this document to build OpenCV, your `YOUR_OPENCV_BIN` is `YOUR_OPENCV_SRC/build`.
 
 You can now run the app on your computer by clicking on the green run button at the bottom-left of the Qt Creator window.
 
