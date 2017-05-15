@@ -1,5 +1,7 @@
 # Thymio Programming Adventure
 
+![banner](banner.jpg)
+
 An interactive tutoring to learning programming using the [Thymio robot](http://thymio.org) and Augmented Reality.
 
 ## Authors and license
