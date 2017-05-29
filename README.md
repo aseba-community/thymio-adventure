@@ -3,6 +3,7 @@
 ![banner](banner.jpg)
 
 An interactive tutoring to learning programming using the [Thymio robot](http://thymio.org) and Augmented Reality.
+A booklet describing the project is available [here](http://www.mobsya.org/ext-media/Thymio_adventure%20-%20small.pdf).
 
 ## Authors and license
 
